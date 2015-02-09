@@ -2,10 +2,11 @@
 Welcome to the MyOpenTrader Source repository. 
 
 
-/*
-* Copyright (C) 2015 Stephan Grotz - stephan@myopentrader.org
-* Feb 2015 - v0.1-alpha
-*/
+```
+Copyright (C) 2015 Stephan Grotz - stephan@myopentrader.org
+Feb 2015 - v0.1-alpha
+```
+
  
  
 IMPORTANT LINKS:
