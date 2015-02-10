@@ -17,6 +17,8 @@ local.properties
 .settings/
 .loadpath
 target/
+*/javadoc/*
+*/libs/*
 
 
 # External tool builders

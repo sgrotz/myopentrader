@@ -4,7 +4,7 @@
   <groupId>org.mot.common</groupId>
   <artifactId>MyOpenTraderCommon</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.16</version>
+  <version>0.0.17</version>
   <name>MyOpenTraderCommon</name>
   <description>This package is part of the MyOpenTrader Open Source Trading Engine. For more information, please visit us http://www.myopentrader.org. Thanks!</description>
   <url>http://api.myopentrader.org</url>
@@ -163,7 +163,7 @@
 	<dependency>
 	    <groupId>eu.verdelhan</groupId>
 	    <artifactId>ta4j</artifactId>
-	    <version>0.7-SNAPSHOT</version>
+	    <version>0.6</version>
 	</dependency>		
 		
         <!-- Include Joda Time -->

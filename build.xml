@@ -10,7 +10,7 @@
     <property name="root.Dir" location="${basedir}"/>
     <property name="buildDir" location="${root.Dir}/MyOpenTraderBin"/>
     
-    <property name="version" value="0.1"/>
+    <property name="version" value="0.1.1"/>
 
     <target name="build">
     

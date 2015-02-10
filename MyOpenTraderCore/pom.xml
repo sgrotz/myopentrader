@@ -4,7 +4,7 @@
    <groupId>org.mot.core</groupId>
    <artifactId>MyOpenTraderCore</artifactId>
    <packaging>jar</packaging>
-   <version>0.0.16</version>
+   <version>0.0.17</version>
    <name>MyOpenTraderCore</name>
    <description>This package is part of the MyOpenTrader Open Source Trading Engine. For more information, please visit us http://www.myopentrader.org. Thanks!</description>
    <url>http://api.myopentrader.org</url>

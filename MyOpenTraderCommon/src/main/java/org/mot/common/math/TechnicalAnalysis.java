@@ -157,7 +157,7 @@ public class TechnicalAnalysis {
 			String startDate = db.subtractDaysFromDate(today, pattern, days + iteration);
 			
 			series = this.getSeriesByDate(symbol, startDate, today);
-			seriesSize =  series.size();
+			seriesSize =  series.getTickCount();
 			
 			// Increase the iteration by the difference between days and current seriesSize
 			iteration = iteration + (days - seriesSize);
@@ -183,7 +183,7 @@ public class TechnicalAnalysis {
 			String sd = db.subtractDaysFromDate(today, pattern, days + iteration);
 			
 			series = this.getSeriesByDate(symbol, sd, today);
-			seriesSize =  series.size();
+			seriesSize =  series.getTickCount();
 			
 			// Increase the iteration by the difference between days and current seriesSize
 			iteration = iteration + (days - seriesSize);
@@ -213,7 +213,7 @@ public class TechnicalAnalysis {
 		logger.debug("Running stochastic oscillator calculation for " + symbol + " the last " + days + " days!");
 		
 		TimeSeries series = this.getSeriesByDays(symbol, startDate, days, true);
-		int timeFrame = series.size() -1;
+		int timeFrame = series.getTickCount();
 		
 		if (timeFrame > 0) {
 			StochasticOscillatorKIndicator soki = new StochasticOscillatorKIndicator(series, timeFrame);
@@ -242,9 +242,9 @@ public class TechnicalAnalysis {
 		// create a new series
 		//TimeSeries series = ta.getSeriesByDate("AAPL", "2014-11-17", "2014-12-25");
 		TimeSeries series = ta.getSeriesByDays("AAPL", 5, true);
-		System.out.println("Series contains " + series.size() + " ticks");
+		System.out.println("Series contains " + series.getTickCount() + " ticks");
 		
-		int lastTick = series.size() - 1;
+		int lastTick = series.getTickCount() - 1;
 		
 		// Create a close price indicator
 		ClosePriceIndicator closePrice = new ClosePriceIndicator(series);

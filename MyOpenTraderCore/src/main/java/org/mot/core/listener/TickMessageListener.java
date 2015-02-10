@@ -72,7 +72,7 @@ public class TickMessageListener implements MessageListener {
 					
 					if ((field.equals("ASK") || field.equals("BID")) && !field.equals(null)) {
 						// Send only the ASK/BID ticks to Esper
-						//ef.sendEsperEvent(tick);
+						ef.sendEsperEvent(tick);
 					
 						logger.trace("Successfully sent esper event for: " + tick.toString());
 						
