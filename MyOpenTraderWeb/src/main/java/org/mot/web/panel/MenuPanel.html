@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>Wicket Examples - sample panel</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+ 
+ Everything outside of the &lt;wicket:panel&gt; tags will be ignored.
+ Might be handy as preview code.
+ 
+ <wicket:panel>
+ 
+ 	<b>Main Menu: </b><br>
+ 	<a href="#" wicket:id="strategy">Strategies</a> <br>
+ 	<a href="#" wicket:id="orders">Orders</a> <br>
+ 	<a href="#" wicket:id="watchlist">Watchlist</a> <br>
+ 	<br> <p>
+	<b>All Stocks: </b><br>
+        <span wicket:id="listview">
+        	  <a href="#" wicket:id="Link">
+        		<span wicket:id="LinkName"/>
+   			  </a><br/>
+		</span>
+ 	 	<br> <p>
+	<b>Indexes: </b><br>
+        <span wicket:id="indexview">
+        	  <a href="#" wicket:id="Link">
+        		<span wicket:id="LinkName"/>
+   			  </a><br/>
+		</span>
+ 	 	<br> <p>
+	<b>Forex: </b><br>
+        <span wicket:id="fxview">
+        	  <a href="#" wicket:id="Link">
+        		<span wicket:id="LinkName"/>
+   			  </a><br/>
+		</span>
+ 	 	<br> <p> 	 	
+	<b>ETF's: </b><br>
+        <span wicket:id="etfview">
+        	  <a href="#" wicket:id="Link">
+        		<span wicket:id="LinkName"/>
+   			  </a><br/>
+		</span>		
+ </wicket:panel>
+
+</body>
+</html>

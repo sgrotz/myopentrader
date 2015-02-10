@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title wicket:id="pageTitle"></title>  
+<link href="layout.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<table width="1024" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="19"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="25%"><a wicket:id="HOME"><img src="images/logo.png" width="260" height="78" /></a></td>
+        <td width="75%" class="Header">Welcome to MyOpenTrader.org
+		<div class="Footer" wicket:id="pricePanel"/>
+        </td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="22%" height="206" valign="top"><div wicket:id="menu"></div>
+        </td>
+        <td width="78%"><p>&nbsp;</p>
+          
+          <table width="100%" border="0">
+            <tr>
+              <td><table width="100%" border="0">
+                <tr>
+                  <td><table class="motTable" cellspacing="0" wicket:id="watchlistTable">[table]</table></td>
+                </tr>
+              </table></td>
+            </tr>
+    </table>
+          </td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td class="Footer"><span wicket:id="TimeStamp"/> - Copyright (c) 2013 by <a href="http://www.myopentrader.org">http://www.myopentrader.org</a> - Powered by Wicket V:<span wicket:id="version"/></td>
+  </tr>
+</table>
+</body>
+</html>

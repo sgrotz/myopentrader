@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="build" name="MyOpenTraderBin Create script">
+
+    <!-- MAC BUILD PROPERTIES 
+    <property name="root.Dir" location="/Users/stephan/Documents/Development"/>
+    <property name="buildDir" location="/Users/stephan/Documents/Development/MyOpenTraderBin"/>
+    -->
+
+    <!-- WINDOWS BUILD PROPERTIES -->
+    <property name="root.Dir" location="${basedir}"/>
+    <property name="buildDir" location="${root.Dir}/MyOpenTraderBin"/>
+    
+    <property name="version" value="0.1"/>
+
+    <target name="build">
+    
+    	<antcall target="clean"/>
+    	<antcall target="init"/>        
+    	
+    	<!-- Increase the version number -->
+        <buildnumber file="version"/>
+ 
+ 	<!-- Copy the required libraries across -->
+	<copy todir="${buildDir}/libs">
+	 <fileset dir="${root.Dir}/MyOpenTraderCore/target">
+	  <include name="*.jar"/>
+ 	 </fileset>
+	 <fileset dir="${root.Dir}/MyOpenTraderCore/target/libs">
+	  <include name="*.jar"/>
+ 	 </fileset>
+	 <fileset dir="${root.Dir}/MyOpenTraderFeederIAB/target">
+	  <include name="*.jar"/>
+ 	 </fileset>
+	 <fileset dir="${root.Dir}/MyOpenTraderFeederIAB/target/libs">
+	  <include name="*.jar"/>
+ 	 </fileset>	 
+  	</copy>
+	
+	<!-- Copy the aggregated API documents across -->
+	<copy todir="${buildDir}/javadoc">
+	 <fileset dir="${root.Dir}/target/site/apidocs">
+	  <include name="**/*"/>
+ 	 </fileset> 	 
+  	</copy>	
+  	
+  	<!-- Copy the version, README & LICENSE file inside the build directory -->
+	<copy todir="${buildDir}/">
+	 <fileset file="${root.Dir}/version"/>
+	 <fileset file="${root.Dir}/README.md"/>
+	 <fileset file="${root.Dir}/LICENSE"/>
+  	</copy>	
+
+	
+	<antcall target="dump-database"/>  
+	<antcall target="zip"/>  
+	
+    </target>
+    
+    <target name="dump-database">  
+        <exec executable="mysqldump" output="${buildDir}/resources/schema_${version}.sql">  
+            <arg value="--user=mot" />  
+            <arg value="--password=mot99" />  
+            <arg value="--host=localhost" />  
+            <arg value="--port=3306" />  
+            <arg value="--no-data" />  
+            <arg value="mot" />  
+        </exec>  
+    </target>
+    
+    <target name="zip">
+	<!-- Create a new zip file as release -->
+	<zip destfile="${root.Dir}/MyOpenTrader-${version}-bin.zip" excludes="*.bat, *.xml">
+	  <fileset dir="${basedir}"> 
+	    <include name="MyOpenTraderBin/**" /> 
+  	  </fileset> 
+	</zip>
+    </target>
+    
+    <target name="clean">
+    	<delete file="${root.Dir}/MyOpenTrader-${version}-bin.zip"/>
+    	<delete dir="${root.Dir}/data"/>
+    	<delete file="${buildDir}/version"/>
+        <delete dir="${buildDir}/libs"/>
+        <delete dir="${buildDir}/data"/>
+        <delete dir="${buildDir}/logs"/>
+        <delete dir="${buildDir}/javadoc"/>
+        <delete dir="${buildDir}/bin/logs"/>
+    </target>
+    
+    <target name="init">
+    	<mkdir dir="${buildDir}/javadoc"/>
+        <mkdir dir="${buildDir}/libs"/>
+    </target>
+        
+</project>
