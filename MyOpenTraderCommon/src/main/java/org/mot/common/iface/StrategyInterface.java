@@ -53,19 +53,7 @@ import com.espertech.esper.client.UpdateListener;
 		 * to access the values. 
 		 */
 		ArrayList<Expression> getEsperExpression();
-		
-		/*
-		 * This method is used to evaluate each order. Once a decision has been made to buy or sell, 
-		 * the evaluate order should be called to make sure 
-		 */
-		//Boolean evaluateOrder(Order order, Order previousOrder, Boolean writeToDB);
-		
-		/*
-		 * The getBarrier Method is used to determine the absolute value, at which a position can be closed. 
-		 * This method is called from the orderEngine...
-		 */
-		//Double getBarrier(Integer quantity, Double price);
-		
+				
 		
 		/**
 		 * This method is used to simulate back tests. These tests are important for simulating the past 

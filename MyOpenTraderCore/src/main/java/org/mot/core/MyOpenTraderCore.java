@@ -391,16 +391,18 @@ public class MyOpenTraderCore extends HttpServlet {
 			Options options = new Options();
 			options.addOption("c", true, "Config directory");
 			options.addOption("e", true, "Executor name (ALL is default wildcard)");
+			options.addOption("h", false, "Print the command line help");
 			
-			if (args.length == 0) {
+			CommandLineParser parser = new BasicParser();
+			CommandLine cmd = parser.parse( options, args);
+	
+			if (args.length == 0 || cmd.hasOption("h")) {
 				System.out.println("*** Missing arguments: ***");
 				HelpFormatter formatter = new HelpFormatter();
 				formatter.printHelp( "runMyOpenTraderCore.sh|.bat", options );
 				System.exit(0);
 			}
 			
-			CommandLineParser parser = new BasicParser();
-			CommandLine cmd = parser.parse( options, args);
 			
 			String confDir = "conf";
 			// Get the configuration directory

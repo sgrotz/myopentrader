@@ -50,7 +50,7 @@
 	 <fileset file="${root.Dir}/LICENSE"/>
   	</copy>	
 
-	
+	<!-- <antcall target="download-usage-guide"/>  -->
 	<antcall target="dump-database"/>  
 	<antcall target="zip"/>  
 	
@@ -65,6 +65,11 @@
             <arg value="--no-data" />  
             <arg value="mot" />  
         </exec>  
+    </target>
+    
+    <target name="download-usage-guide">
+	    <get src="http://wiki.myopentrader.org/confluence/spaces/flyingpdf/pdfpageexport.action?pageId=786435" 
+		dest="${buildDir}/resources/GettingStartedGuide_${version}.pdf" />
     </target>
     
     <target name="zip">
