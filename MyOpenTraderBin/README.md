@@ -17,7 +17,7 @@ IMPORTANT LINKS:
 * [MyOpentrader.org] (http://www.myopentrader.org)
 * [wiki.myopentrader.org] (http://wiki.myopentrader.org)
 * [forum.myopentrader.org] (http://forum.myopentrader.org)
-* [Download the binaries from Sourceforge] (https://sourceforge.net/projects/myopentrader/files/)
+* [Download the binaries from Github] (https://github.com/sgrotz/myopentrader/releases)
 * [Download the sources from Github] (https://github.com/sgrotz/myopentrader)
 
 

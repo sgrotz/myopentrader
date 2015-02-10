@@ -27,6 +27,11 @@ import java.util.Map.Entry;
 
 import javax.jms.MessageProducer;
 
+import org.apache.commons.cli.BasicParser;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
 import org.apache.log4j.PropertyConfigurator;
 import org.mot.common.db.TickPriceDAO;
 import org.mot.common.db.WatchListDAO;
@@ -90,51 +95,93 @@ public class TickPriceReplayer {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		PropertiesFactory pf = PropertiesFactory.getInstance();
-		pf.setConfigDir(args[0]);
-
-		System.setProperty("PathToConfigDir", pf.getConfigDir());
-		PropertyConfigurator.configure(pf.getConfigDir() + "/log4j.properties");
-
-		System.out.println("Starting to publish ...");
-
-		WatchListDAO wld = new WatchListDAO();
-
-		Map<Integer, String> instruments = wld.getWatchlistAsTable();
-		Iterator<Entry<Integer, String>> it = instruments.entrySet().iterator();
 		
-		final int count = Integer.valueOf(args[1]);
-
-		Thread[] threads = new Thread[instruments.size()];
-		int i =0;
-
-		while (it.hasNext()) {
-			final Map.Entry<Integer, String> entry = it.next();
-
-			threads[i] = new Thread() {
-				public void run() {
-					TickPriceReplayer tpr = new TickPriceReplayer();
-					tpr.processByDays(entry.getValue(), count);
-				}
-			};
-			threads[i].start();
-			i++;
-		}
-
-		for (int y = 0; y < threads.length; y++) {
-			try {
-				threads[y].join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		
+		try {
+			Options options = new Options();
+			options.addOption("c", true, "Config directory");
+			options.addOption("d", true, "How many days to replay (default: 1)");
+			options.addOption("h", false, "Print the command line help");
+						
+			CommandLineParser parser = new BasicParser();
+			CommandLine cmd = parser.parse( options, args);
+	
+			if (args.length == 0 || cmd.hasOption("h")) {
+				System.out.println("*** Missing arguments: ***");
+				HelpFormatter formatter = new HelpFormatter();
+				formatter.printHelp( "runTickGenerator.sh|.bat", options );
+				System.exit(0);
 			}
+			
+			// Get Properties Instance
+			PropertiesFactory pf = PropertiesFactory.getInstance();
+			
+			// Set the configuration directory
+			String configDir;
+			if (cmd.getOptionValue("c") != null) {
+				configDir = cmd.getOptionValue("c");
+			} else {
+				configDir = "conf";
+			}
+		
+			int daysToReplay = 1;
+			if (cmd.getOptionValue("d") != null) {
+				daysToReplay = Integer.valueOf(cmd.getOptionValue("d"));
+			} 
+		
+			pf.setConfigDir(configDir);
+	
+			System.setProperty("PathToConfigDir", pf.getConfigDir());
+			PropertyConfigurator.configure(pf.getConfigDir() + "/log4j.properties");
+	
+			System.out.println("********************************");
+			System.out.println("* Running new TickReplayer ");
+			System.out.println("* Using configuration from: " + configDir);
+			System.out.println("* Replaying all ticks for the last " + daysToReplay + " days");
+			System.out.println("********************************");
+			
+			WatchListDAO wld = new WatchListDAO();
+	
+			Map<Integer, String> instruments = wld.getWatchlistAsTable();
+			Iterator<Entry<Integer, String>> it = instruments.entrySet().iterator();
+			
+			final int count = daysToReplay;
+	
+			Thread[] threads = new Thread[instruments.size()];
+			int i =0;
+	
+			while (it.hasNext()) {
+				final Map.Entry<Integer, String> entry = it.next();
+	
+				threads[i] = new Thread() {
+					public void run() {
+						TickPriceReplayer tpr = new TickPriceReplayer();
+						tpr.processByDays(entry.getValue(), count);
+					}
+				};
+				threads[i].start();
+				i++;
+			}
+	
+			for (int y = 0; y < threads.length; y++) {
+				try {
+					threads[y].join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+	
+	
+			System.out.println("Finished publishing ...");
+			System.out.println("********************************");
+	
+			// Not sure why the class doesnt automatically end. Requires to call system.exit?!?!?!?!
+			System.exit(0);
+		} catch (Exception e) {
+			
+			
 		}
-
-
-		System.out.println("Finished publishing ...");
-
-		// Not sure why the class doesnt automatically end. Requires to call system.exit?!?!?!?!
-		System.exit(0);
 
 	}
 

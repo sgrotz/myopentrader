@@ -136,20 +136,18 @@ public class TickGenerator {
 			options.addOption("m", true, "Max volatility of tick prices (default: 18) - formula is 0.01x18=0.18");
 			options.addOption("t", true, "Set a max count of ticks to create (default: unlimited)");
 			options.addOption("r", true, "Set the replay flag - ignores writing to database (default: false)");
-			
-			if (args.length == 0) {
+			options.addOption("h", false, "Print the command line help");
+						
+			CommandLineParser parser = new BasicParser();
+			CommandLine cmd = parser.parse( options, args);
+	
+			if (args.length == 0 || cmd.hasOption("h")) {
 				System.out.println("*** Missing arguments: ***");
 				HelpFormatter formatter = new HelpFormatter();
 				formatter.printHelp( "runTickGenerator.sh|.bat", options );
 				System.exit(0);
 			}
 			
-			CommandLineParser parser = new BasicParser();
-			CommandLine cmd = parser.parse( options, args);
-			
-			// Get Properties Instance
-			PropertiesFactory pf = PropertiesFactory.getInstance();
-	
 			// Set the configuration directory
 			String configDir;
 			if (cmd.getOptionValue("c") != null) {
@@ -157,6 +155,9 @@ public class TickGenerator {
 			} else {
 				configDir = "conf";
 			}
+			
+			// Get Properties Instance
+			PropertiesFactory pf = PropertiesFactory.getInstance();
 			
 			// First make sure to set the config directory
 			pf.setConfigDir(configDir);
