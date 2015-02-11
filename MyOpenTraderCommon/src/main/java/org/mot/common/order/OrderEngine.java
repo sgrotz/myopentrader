@@ -75,22 +75,36 @@ public class OrderEngine {
 	}
 	
 
+	/**
+	 * This method validates if a particular exchange is open
+	 * @param exchange - the exchange code to check (NYSE, NASDAQ)
+	 * @return boolean indicator, if exchange is open (true) or closed (false)
+	 */
+	public boolean isExchangeOpen(String exchange) {
+		return ed.isExchangOpen(exchange);
+	}
+	
+	
 
 	/**
 	 * The main method, which will execute the order. It also determines, if the order is being written to the DB
 	 * 
 	 * @param order - order to execute
 	 * @param writeToDB - boolean - shall the order get persisted in the database?
+	 * @param ignoreIfExchangeClosed - boolean indicator, if true, this order will be ignored if the exchange is closed.
 	 * @return
 	 */
-	public boolean executeOrder(Order order, boolean writeToDB) {
-		
+	public boolean executeOrder(Order order, boolean writeToDB, boolean ignoreIfExchangeClosed) {
 		
 		logger.debug("Received new order " + order.getID() + " for symbol " + order.getSymbol());
 		String exchange = wld.getExchangeForSymbol(order.getSymbol());
+		boolean open = true;
 		
-		boolean open = ed.isExchangOpen(exchange);
-		logger.debug("Exchange for " + order.getID() + " is open: " + open);
+		// Check if the exchange is currently open
+		if (!ignoreIfExchangeClosed) {
+			open = this.isExchangeOpen(exchange);
+			logger.debug("Exchange for " + order.getID() + " is open: " + open);
+		} 
 		
 		// Only process if the exchange is open
 		if ( open || order.isSimulated()) {
@@ -125,6 +139,21 @@ public class OrderEngine {
 			return false; 
 		}
 		
+	}
+	
+	
+	/**
+	 * Use this method to find out how many shares are still open for a particular strategy.
+	 * @param strategy - Strategyname
+	 * @return an integer representation of how many shares are still open
+	 */
+	public int getOpenOrderQuantity(String strategy) {
+		int ret = 0;
+		Order [] orders = od.getAllOpenOrders(strategy);
+		for (int i = 0; i < orders.length; i++) {
+			ret = ret + orders[i].getQuantity();
+		}
+		return ret;
 	}
 	
 	

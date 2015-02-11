@@ -22,7 +22,6 @@ IMPORTANT LINKS:
 
 
 REQUIREMENTS:
-* To compile the sources: Fork of the TA4J Library - see [https://github.com/sgrotz/ta4j]
 * MySQL Server installed and configured.
 * Java 1.6++
 

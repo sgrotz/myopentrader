@@ -42,7 +42,7 @@ import com.espertech.esper.client.UpdateListener;
 		 * This is the main method for receiving any tick updates from the CEP Engine. 
 		 * Two arrays are passed in, one with the new events, another one with all old events. 
 		 * 
-		 * (non-Javadoc)
+		 * @see http://wiki.myopentrader.org/confluence/display/MOTD/Interface+method%3A+Update
 		 * @see com.espertech.esper.client.UpdateListener#update(com.espertech.esper.client.EventBean[], com.espertech.esper.client.EventBean[])
 		 */
 		void update(EventBean[] newEvents, EventBean[] oldEvents);
@@ -51,6 +51,7 @@ import com.espertech.esper.client.UpdateListener;
 		 * This method is used to return any esper expressions, which want to be run as part of the strategy. 
 		 * As part of this, the code should provide a name and an expression. Use the name in the update method
 		 * to access the values. 
+		 * @see http://wiki.myopentrader.org/confluence/display/MOTD/Interface+Method%3A+getEsperExpressions
 		 */
 		ArrayList<Expression> getEsperExpression();
 				
@@ -86,6 +87,7 @@ import com.espertech.esper.client.UpdateListener;
 		/**
 		 * The startup method is used as the main constructor. It is called once at bootup/initialization phase.
 		 * This should be used to initiate any new strategy
+		 * @see http://wiki.myopentrader.org/confluence/display/MOTD/Interface+Method%3A+startup
 		 */
 		void startup(String name, String symbol, LoadValue[] values, Boolean simulated, Integer amount);
 		

@@ -128,7 +128,7 @@ public class WatchDog implements Job {
 					order[i].setPrice(lastKnownPrice);
 					order[i].setForced(true);
 					
-					oe.executeOrder(order[i], true);
+					oe.executeOrder(order[i], true, true);
 				}
 						
 				

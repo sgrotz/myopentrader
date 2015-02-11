@@ -323,6 +323,42 @@ public class OrderDAO {
 		return list.toArray(orders); 
 	}
 	
+	public Order[] getAllOpenOrders(String strategy) {
+		
+		ArrayList<Order> list = new ArrayList<Order>();
+		
+		Connection connection = dcf.getConnection();
+		Statement s;
+		try {
+			s = connection.createStatement ();
+				
+			String query = "SELECT * FROM orders where BUYSELL = 'BUY' and CLOSED = '' and STRATEGY = '"+ strategy + "' order by TIMESTAMP desc";
+		
+    		logger.debug(query);
+	    	ResultSet rs = s.executeQuery(query);
+
+	    	while (rs.next()) {
+	    		Order order = mapResultSetToOrder(rs);
+
+	    		list.add(order);
+	    		
+	    	}
+
+	    	s.close();
+	    	dcf.disconnect(connection);
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dcf.disconnect(connection);
+		}
+		
+		Order[] orders = new Order[list.size()];
+
+		return list.toArray(orders); 
+	}
+	
 	public Order[] getAllClosedOrders() {
 		
 		ArrayList<Order> list = new ArrayList<Order>();
