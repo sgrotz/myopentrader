@@ -24,8 +24,8 @@
 import org.mot.common.db.TickHistoryRequestsDAO;
 import org.mot.common.util.DateBuilder;
 import org.mot.common.util.IDGenerator;
-import org.mot.iab.client.Contract;
-import org.mot.iab.client.EClientSocket;
+import org.mot.feeder.iab.client.Contract;
+import org.mot.feeder.iab.client.EClientSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

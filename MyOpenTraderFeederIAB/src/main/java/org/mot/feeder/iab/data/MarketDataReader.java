@@ -22,8 +22,8 @@
   package org.mot.feeder.iab.data;
 
 import org.mot.common.db.WatchListDAO;
-import org.mot.iab.client.Contract;
-import org.mot.iab.client.EClientSocket;
+import org.mot.feeder.iab.client.Contract;
+import org.mot.feeder.iab.client.EClientSocket;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

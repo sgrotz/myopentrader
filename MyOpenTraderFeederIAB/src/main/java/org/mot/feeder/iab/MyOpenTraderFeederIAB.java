@@ -36,10 +36,10 @@ import org.mot.common.mq.ActiveMQFactory;
 import org.mot.common.objects.WatchList;
 import org.mot.common.tools.PropertiesFactory;
 import org.mot.common.util.IDGenerator;
+import org.mot.feeder.iab.client.EClientSocket;
 import org.mot.feeder.iab.data.MarketDataReader;
 import org.mot.feeder.iab.listener.OrderMessageListener;
 import org.mot.feeder.iab.wrapper.IABConnector;
-import org.mot.iab.client.EClientSocket;
 import org.slf4j.Logger; 
 import org.slf4j.LoggerFactory;
 

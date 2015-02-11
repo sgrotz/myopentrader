@@ -1,3 +1,6 @@
+/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+ * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
+
 
 
  /*
@@ -19,29 +22,19 @@
   */
   
   
-  package org.mot.feeder.iab.wrapper;
+  package org.mot.feeder.iab.controller;
 
-import org.mot.feeder.iab.client.EClientSocket;
-import org.mot.feeder.iab.client.EWrapper;
-import org.mot.feeder.iab.wrapper.MarketDataWrapper;
+public class Alias {
+	private String m_account;
+	private String m_alias;
 
-public class IABConnector {
+	public String alias() { return m_alias; }
+	public String account() { return m_account; }
 
-	
-	
-	
-	private static EClientSocket ecs;
-	
-	public static EClientSocket getInstance(){
-		
-		if (ecs == null){
-			// Create a new sample wrapper
-			EWrapper ew = new MarketDataWrapper();
-			ecs = new EClientSocket(ew);
-		}
-		
-		return ecs;
+	public void alias( String v) { m_alias = v; }
+	public void account( String v) { m_account = v; }
+
+	@Override public String toString() {
+		return m_account + " / " + m_alias;
 	}
-	
-	
 }

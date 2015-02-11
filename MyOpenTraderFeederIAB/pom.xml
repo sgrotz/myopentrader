@@ -4,7 +4,7 @@
 	<groupId>org.mot.feeder.iab</groupId>
 	<artifactId>MyOpenTraderFeederIAB</artifactId>
 	<packaging>jar</packaging>
-	<version>0.0.14</version>
+	<version>0.0.15</version>
 	<name>MyOpenTraderFeederIAB</name>
 	<description>This package is part of the MyOpenTrader Open Source Trading Engine. For more information, please visit us http://www.myopentrader.org. Thanks!</description>
 	<url>http://api.myopentrader.org</url>
@@ -23,16 +23,6 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.6.6</version>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-jdk14</artifactId>
-			<version>1.6.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.6</version>
-		</dependency>	 -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>

@@ -75,6 +75,8 @@ import com.espertech.esper.client.UpdateListener;
 		 * for "special" reasons. This could happen, if a trade is stuck or losses were too large. This is an easy way to
 		 * protect for stop-lossing.
 		 * 
+		 * @see http://wiki.myopentrader.org/confluence/display/MOTD/Interface+method%3A+closeOrder
+		 * 
 		 * @param order - should this order be closed? 
 		 * @param lastKnownPrice - the last known price as per our internal database. 
 		 * @param diffPct - the difference between the order buy price and the last known price in percent

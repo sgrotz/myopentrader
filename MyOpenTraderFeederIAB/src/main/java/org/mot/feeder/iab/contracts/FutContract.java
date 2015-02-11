@@ -1,3 +1,6 @@
+/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+ * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
+
 
 
  /*
@@ -19,29 +22,25 @@
   */
   
   
-  package org.mot.feeder.iab.wrapper;
+  package org.mot.feeder.iab.contracts;
 
-import org.mot.feeder.iab.client.EClientSocket;
-import org.mot.feeder.iab.client.EWrapper;
-import org.mot.feeder.iab.wrapper.MarketDataWrapper;
+import org.mot.feeder.iab.client.Contract;
 
-public class IABConnector {
+public class FutContract extends Contract {
 
-	
-	
-	
-	private static EClientSocket ecs;
-	
-	public static EClientSocket getInstance(){
-		
-		if (ecs == null){
-			// Create a new sample wrapper
-			EWrapper ew = new MarketDataWrapper();
-			ecs = new EClientSocket(ew);
-		}
-		
-		return ecs;
-	}
-	
-	
+   public FutContract(String symbol, String expiry) {
+      m_symbol = symbol;
+      m_secType = "FUT";
+      m_exchange = "ONE";
+      m_currency = "USD";
+      m_expiry = expiry;
+   }
+
+   public FutContract(String symbol, String expiry, String currency) {
+      m_symbol = symbol;
+      m_secType = "FUT";
+      m_currency = currency;
+      m_expiry = expiry;
+   }
 }
+

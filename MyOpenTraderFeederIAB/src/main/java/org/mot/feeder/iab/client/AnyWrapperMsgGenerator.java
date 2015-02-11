@@ -1,3 +1,6 @@
+/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+ * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
+
 
 
  /*
@@ -19,29 +22,22 @@
   */
   
   
-  package org.mot.feeder.iab.wrapper;
+  package org.mot.feeder.iab.client;
 
-import org.mot.feeder.iab.client.EClientSocket;
-import org.mot.feeder.iab.client.EWrapper;
-import org.mot.feeder.iab.wrapper.MarketDataWrapper;
+public class AnyWrapperMsgGenerator {
+    public static String error( Exception ex) { return "Error - " + ex;}
+    public static String error( String str) { return str;}
 
-public class IABConnector {
-
-	
-	
-	
-	private static EClientSocket ecs;
-	
-	public static EClientSocket getInstance(){
-		
-		if (ecs == null){
-			// Create a new sample wrapper
-			EWrapper ew = new MarketDataWrapper();
-			ecs = new EClientSocket(ew);
-		}
-		
-		return ecs;
+	public static String error(int id, int errorCode, String errorMsg) {
+		String err = Integer.toString(id);
+        err += " | ";
+        err += Integer.toString(errorCode);
+        err += " | ";
+        err += errorMsg;
+        return err;
 	}
-	
-	
+
+	public static String connectionClosed() {
+		return "Connection Closed";
+	}
 }

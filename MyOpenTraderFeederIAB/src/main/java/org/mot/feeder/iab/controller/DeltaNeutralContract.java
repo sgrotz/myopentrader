@@ -1,3 +1,6 @@
+/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+ * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
+
 
 
  /*
@@ -19,29 +22,21 @@
   */
   
   
-  package org.mot.feeder.iab.wrapper;
+  package org.mot.feeder.iab.controller;
 
-import org.mot.feeder.iab.client.EClientSocket;
-import org.mot.feeder.iab.client.EWrapper;
-import org.mot.feeder.iab.wrapper.MarketDataWrapper;
 
-public class IABConnector {
+public class DeltaNeutralContract {
+	private int m_conid;
+	private double m_delta;
+	private double m_price;
 
-	
-	
-	
-	private static EClientSocket ecs;
-	
-	public static EClientSocket getInstance(){
-		
-		if (ecs == null){
-			// Create a new sample wrapper
-			EWrapper ew = new MarketDataWrapper();
-			ecs = new EClientSocket(ew);
-		}
-		
-		return ecs;
+	public int conid() { return m_conid; }
+	public double delta() { return m_delta; }
+	public double price() { return m_price; }
+
+	public DeltaNeutralContract(int conid, double delta, double price) {
+		m_conid = conid;
+		m_delta = delta;
+		m_price = price;
 	}
-	
-	
 }

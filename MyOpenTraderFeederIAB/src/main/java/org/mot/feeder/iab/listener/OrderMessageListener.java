@@ -30,9 +30,9 @@ import javax.jms.MessageListener;
 
 import org.apache.log4j.Logger;
 import org.mot.common.objects.Order;
+import org.mot.feeder.iab.client.Contract;
+import org.mot.feeder.iab.client.EClientSocket;
 import org.mot.feeder.iab.wrapper.IABConnector;
-import org.mot.iab.client.Contract;
-import org.mot.iab.client.EClientSocket;
 
 
 
@@ -72,7 +72,7 @@ public class OrderMessageListener implements MessageListener {
 			
 			int orderID = Integer.valueOf(order.getID());
 			
-			org.mot.iab.client.Order iabOrder = new org.mot.iab.client.Order();
+			org.mot.feeder.iab.client.Order iabOrder = new org.mot.feeder.iab.client.Order();
 			iabOrder.m_action = order.getBUYSELL();
 			
 			iabOrder.m_orderType = "MKT";

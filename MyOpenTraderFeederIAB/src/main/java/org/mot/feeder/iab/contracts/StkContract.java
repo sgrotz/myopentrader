@@ -1,3 +1,6 @@
+/* Copyright (C) 2013 Interactive Brokers LLC. All rights reserved.  This code is subject to the terms
+ * and conditions of the IB API Non-Commercial License or the IB API Commercial License, as applicable. */
+
 
 
  /*
@@ -19,29 +22,17 @@
   */
   
   
-  package org.mot.feeder.iab.wrapper;
+  package org.mot.feeder.iab.contracts;
 
-import org.mot.feeder.iab.client.EClientSocket;
-import org.mot.feeder.iab.client.EWrapper;
-import org.mot.feeder.iab.wrapper.MarketDataWrapper;
+import org.mot.feeder.iab.client.Contract;
 
-public class IABConnector {
+public class StkContract extends Contract {
 
-	
-	
-	
-	private static EClientSocket ecs;
-	
-	public static EClientSocket getInstance(){
-		
-		if (ecs == null){
-			// Create a new sample wrapper
-			EWrapper ew = new MarketDataWrapper();
-			ecs = new EClientSocket(ew);
-		}
-		
-		return ecs;
-	}
-	
-	
+   public StkContract(String symbol) {
+      m_symbol = symbol;
+      m_secType = "STK";
+      m_exchange = "SMART";
+      m_currency = "USD";
+   }
 }
+
