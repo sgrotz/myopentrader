@@ -15,6 +15,7 @@
         <module>MyOpenTraderCore</module>
         <module>MyOpenTraderFeederIAB</module>
         <!-- DISABLED FOR NOW ... <module>MyOpenTraderWeb</module> -->
+        <module>MyOpenTraderWeb</module>
     </modules>
 
   	<build>

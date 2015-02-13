@@ -73,7 +73,7 @@ public class RealTimeTickChart extends Chart {
 			     
 			     Tick tick = tpd.getLastPriceForSymbolAsObject(symbol, "LAST");
 			     point.setY(tick.getPrice());
-			     point.setX(tick.getTimestamp());
+			     point.setX(tick.getTimestamp().getTime());
 			     
 			     return point;
 			}
@@ -99,7 +99,7 @@ public class RealTimeTickChart extends Chart {
 	    for (int i = 0; i < size; i++) {
 	      result
 	          .add(new Point()
-	              .setX(ticks[i].getTimestamp())
+	              .setX(ticks[i].getTimestamp().getTime())
 	              .setY(ticks[i].getPrice())
 	              );
 	      //time += 1000;

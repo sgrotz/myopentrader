@@ -23,18 +23,11 @@
 	<groupId>org.mot.web</groupId>
 	<artifactId>MyOpenTraderWeb</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.13</version>
-		<!-- TODO project name  -->
+	<version>0.0.14</version>
 	<name>MyOpenTraderWeb</name>
 	<description>This package is part of the MyOpenTrader Open Source Trading Engine. For more information, please visit us http://www.myopentrader.org. Thanks!</description>
 	<url>http://api.myopentrader.org</url>
         <inceptionYear>2012</inceptionYear>
-	<!--
-		<organization>
-			<name>company name</name>
-			<url>company url</url>
-		</organization>
-	-->
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -56,6 +49,7 @@
 			<artifactId>wicket-core</artifactId>
 			<version>${wicket.version}</version>
 		</dependency>
+		
 		<!-- OPTIONAL DEPENDENCY -->
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
@@ -63,8 +57,7 @@
 			<version>${wicket.version}</version>
 		</dependency>
 		
-
-    	<dependency>
+    		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>LATEST</version>

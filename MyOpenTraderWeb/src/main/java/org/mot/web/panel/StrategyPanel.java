@@ -34,12 +34,11 @@ public class StrategyPanel extends Panel {
 	public StrategyPanel(String id, final String symbol) {
 		super(id);
 		
-
 		try {
 			config = new PropertiesConfiguration(pathToConfigDir + "/config.properties");
 			StrategyAnalyser sa = new StrategyAnalyser();
 			
-		    add( new ListView<StrategyAnalysis>("strategyList", sa.analyseBySymbol(symbol) ) 
+		    /*add( new ListView<StrategyAnalysis>("strategyList", sa.analyseBySymbol(symbol) ) 
 		    { 
 	
 					@Override
@@ -51,14 +50,14 @@ public class StrategyPanel extends Panel {
 						Double txCost = cf.round(sa.getTxnCost(), 2);
 						Double pnl = cf.round(sa.getPnL() - txCost, 2) ;
 						Double ept = cf.round((sa.getPnL() - sa.getTradeCount()) /sa.getTradeCount(),2);
-						Double eps = cf.round(sa.getPnL()/sa.getQuantity(),2);
+						Double eps = cf.round(sa.getPnL() / sa.getQuantity(),2);
 
 						item.add(new Label("Strategy", "Strategy: " + sa.getName() + "@" + sa.getTradeCount() + " trades - P/L: $" + pnl
 								+ " (TxnCost: $" + txCost  + " - EarningsPerTrade: $" 
 								+  ept + " - Shares: " + sa.getQuantity() + " - EarningsPerShare: $"+ eps +")") );
 						
 					} 
-		    }); 
+		    }); */
 	    
 		} catch (ConfigurationException e) {
 			// TODO Auto-generated catch block

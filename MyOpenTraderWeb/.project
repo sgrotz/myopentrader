@@ -4,7 +4,6 @@
   <comment>This package is part of the MyOpenTrader Open Source Trading Engine. For more information, please visit us http://www.myopentrader.org. Thanks!. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
   <projects>
     <project>MyOpenTraderCommon</project>
-    <project>ta4j</project>
   </projects>
   <buildSpec>
     <buildCommand>
