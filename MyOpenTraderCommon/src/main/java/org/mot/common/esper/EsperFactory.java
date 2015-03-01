@@ -22,7 +22,6 @@
   package org.mot.common.esper;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.mot.common.db.TickPriceDAO;

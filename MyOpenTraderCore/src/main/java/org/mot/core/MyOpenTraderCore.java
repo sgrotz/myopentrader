@@ -187,20 +187,20 @@ public class MyOpenTraderCore extends HttpServlet {
 				QuartzScheduler qs = QuartzScheduler.getInstance();
 				
 				boolean watchDogEnabled = config.getBoolean("watchdog.enabled", true);
-				String wdClass = config.getString("watchdog.class", "org.sg.iab.common.scheduler.WatchDog");
+				String wdClass = config.getString("watchdog.class", "org.mot.core.scheduler.WatchDog");
 
 				if (watchDogEnabled) {
 					qs.scheduleNewRepeatingJob(wdClass, "WatchDog", "base", seconds);
 				}
 
-				String archiverClass = config.getString("tickarchiver.class", "org.sg.iab.common.scheduler.TickArchiver");
+				String archiverClass = config.getString("tickarchiver.class", "org.mot.core.scheduler.TickArchiver");
 				boolean archiverEnabled = config.getBoolean("tickarchiver.enabled", true);
 				
 				if (archiverEnabled) {
 					qs.scheduleNewJob(archiverClass, "Archiver", "base");
 				}
 				
-				String sdrClass = config.getString("staticdatareader.class", "org.sg.iab.common.scheduler.StaticDataCollector");
+				String sdrClass = config.getString("staticdatareader.class", "org.mot.core.scheduler.StaticDataCollector");
 				boolean sdrEnabled = config.getBoolean("staticdatareader.enabled", true);
 				int sdrFrequency = config.getInt("staticdatareader.frequency", 360000);
 
@@ -208,12 +208,21 @@ public class MyOpenTraderCore extends HttpServlet {
 					qs.scheduleNewRepeatingJob(sdrClass, "StaticDataReader", "base", sdrFrequency);
 				}
 				
-				String simClass = config.getString("backtest.simulator.class", "org.sg.iab.common.scheduler.BackTestSimulator");
+				String simClass = config.getString("backtest.simulator.class", "org.mot.core.scheduler.BackTestSimulator");
 				boolean simEnabled = config.getBoolean("backtest.simulator.enabled", true);
 
 				if (simEnabled) {
 					qs.scheduleNewJob(simClass, "Simulator", "base");
 				}
+				
+				boolean emailEnabled = config.getBoolean("email.engine.enabled", true);
+
+				if (emailEnabled) {
+					String emailClass = config.getString("email.engine.class", "org.mot.core.scheduler.EmailEngine");
+					String cronExpression = config.getString("email.engine.cronExpression", "0 1 * * *");
+					qs.scheduleCronJob(emailClass, "EmailEngine", "base", cronExpression);
+				}
+				
 			}
 
 		} catch (ConfigurationException e) {

@@ -66,11 +66,38 @@ public class QuartzScheduler {
 	}
 	
 	
+	/**
+	 * Use this method to create a new repeating job (every x seconds)
+	 * 
+	 * @param className
+	 * @param name
+	 * @param group
+	 * @param seconds
+	 */
 	public void scheduleNewRepeatingJob(String className, String name, String group, int seconds) {
 		try {
 			logger.info("** Starting new repeating scheduled job for " + className + " - repeating every " + seconds + " secs... **");
 			Class jobClass = Class.forName(className);
 			sched.scheduleJob(this.createJob(jobClass, name, group), this.createSimpleRepeatingTrigger(name, group, seconds));
+		} catch (SchedulerException | ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Use this method to create a new daily job (e.g at 2 pm every day)
+	 * 
+	 * @param className
+	 * @param name
+	 * @param group
+	 * @param cronExpression
+	 */
+	public void scheduleCronJob(String className, String name, String group, String cronExpression) {
+		try {
+			logger.info("** Starting new daily scheduled job for " + className + " - running at " + cronExpression + " ... **");
+			Class jobClass = Class.forName(className);
+			sched.scheduleJob(this.createJob(jobClass, name, group), this.createCronTrigger(name, group, cronExpression));
 		} catch (SchedulerException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,6 +132,15 @@ public class QuartzScheduler {
 			          .repeatForever())
 			      .build();
 	}
+	
+	private Trigger createCronTrigger(String name, String group, String cronExpression) {
+		  return newTrigger()
+			      .withIdentity(name, group)
+			      .withSchedule(cronSchedule(cronExpression))
+			      .startNow()
+			      .build();
+	}
+	
 	
 	private Trigger createSimpleSingleTrigger(String name, String group) {
 		  return newTrigger()

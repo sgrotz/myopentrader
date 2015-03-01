@@ -7,6 +7,7 @@
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="var" path="M2_REPO/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1.jar" sourcepath="M2_REPO/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/activation/activation/1.1/activation-1.1.jar" sourcepath="M2_REPO/javax/activation/activation/1.1/activation-1.1-sources.jar"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/wicket/wicket-core/6.14.0/wicket-core-6.14.0.jar" sourcepath="M2_REPO/org/apache/wicket/wicket-core/6.14.0/wicket-core-6.14.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/wicket/wicket-util/6.14.0/wicket-util-6.14.0.jar" sourcepath="M2_REPO/org/apache/wicket/wicket-util/6.14.0/wicket-util-6.14.0-sources.jar"/>
@@ -153,4 +154,5 @@
   <classpathentry kind="var" path="M2_REPO/joda-time/joda-time/2.6/joda-time-2.6.jar" sourcepath="M2_REPO/joda-time/joda-time/2.6/joda-time-2.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/ehcache/ehcache/2.9.0/ehcache-2.9.0.jar" sourcepath="M2_REPO/net/sf/ehcache/ehcache/2.9.0/ehcache-2.9.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/inject/guice/3.0/guice-3.0.jar" sourcepath="M2_REPO/com/google/inject/guice/3.0/guice-3.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2.jar" sourcepath="M2_REPO/com/sun/mail/javax.mail/1.5.2/javax.mail-1.5.2-sources.jar"/>
 </classpath>

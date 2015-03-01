@@ -46,18 +46,26 @@ public class StrategyAnalyser {
 		PropertyConfigurator.configure(pf.getConfigDir() + "/log4j.properties");
 
 		StrategyAnalyser sa = new StrategyAnalyser();
-		CalculatorFactory cf = new CalculatorFactory();
 
 		ArrayList<StrategyAnalysis> salist = sa.analyseAll();
+		
+		System.out.println(sa.getAnalysisAsString(salist));
+		
+	}
+
+	
+	public String getAnalysisAsString(ArrayList<StrategyAnalysis> arrayList)  {
+		
+		StringBuilder sb = new StringBuilder();
 
 		Double pnl = 0.0;
 		Double txn = 0.0;
 		Double invest = 0.0;
 		int tradeCount = 0;
 		
-		for (int i = 0; i < salist.size();i++) {
-			StrategyAnalysis single = salist.get(i);
-			System.out.println("Strategy: " + single.getName() + " - PNL " + single.getPnL() + " - TxnCosts: " + single.getTxnCost() + " - Trades: " + single.getTradeCount());
+		for (int i = 0; i < arrayList.size();i++) {
+			StrategyAnalysis single = arrayList.get(i);
+			sb.append("Strategy: " + single.getName() + " - PNL " + single.getPnL() + " - TxnCosts: " + single.getTxnCost() + " - Trades: " + single.getTradeCount()).append("\n");
 			invest = invest + (single.getQuantity() * single.getPrice());
 			pnl = pnl + single.getPnL();
 			txn = txn + single.getTxnCost();
@@ -79,23 +87,24 @@ public class StrategyAnalyser {
 		Double total = pnl - txn;
 		Double profitPct = total / invest * 100;
 		
-		System.out.println("*** PNL is: " + cf.round(pnl,2) + " minus the transaction costs of: " + cf.round(txn,2));
-		System.out.println("* Total amount of trades: " + tradeCount);
-		System.out.println("* First order date: " + startDate);
-		System.out.println("* Last order date: " + endDate);
-		System.out.println("* Total traded days: " + diffDays);
-		System.out.println("* Total Win/Loss: " + cf.round(total,2)+ "$");
-		System.out.println("* Total investment: " + cf.round(invest, 2)+ "$");
-		System.out.println("* Profit vs Investment Pct: " + cf.round(profitPct,2) + "%");
+		sb.append("*** PNL is: " + cf.round(pnl,2) + " minus the transaction costs of: " + cf.round(txn,2)).append("\n");
+		sb.append("* Total amount of trades: " + tradeCount).append("\n");
+		sb.append("* First order date: " + startDate).append("\n");
+		sb.append("* Last order date: " + endDate).append("\n");
+		sb.append("* Total traded days: " + diffDays).append("\n");
+		sb.append("* Total Win/Loss: " + cf.round(total,2)+ "$").append("\n");
+		sb.append("* Total investment: " + cf.round(invest, 2)+ "$").append("\n");
+		sb.append("* Profit vs Investment Pct: " + cf.round(profitPct,2) + "%").append("\n");
 		
 		Double annualInvestPct = profitPct / diffDays * 200;
-		System.out.println("* Investment Pct annualized: " + cf.round(annualInvestPct,2)+ "%");
+		sb.append("* Investment Pct annualized: " + cf.round(annualInvestPct,2)+ "%").append("\n");
 		
 		Double annualProfit = invest / 100 * annualInvestPct;
-		System.out.println("* Profit annualized: " + cf.round(annualProfit,2)+ "$");
-		System.out.println("***");
+		sb.append("* Profit annualized: " + cf.round(annualProfit,2)+ "$").append("\n");
+		sb.append("***").append("\n");
+		
+		return sb.toString();
 	}
-
 
 
 	public ArrayList<StrategyAnalysis> analyseAll() {
