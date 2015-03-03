@@ -1,3 +1,4 @@
+Warning: Using a password on the command line interface can be insecure.
 -- MySQL dump 10.13  Distrib 5.6.16, for Win32 (x86)
 --
 -- Host: localhost    Database: mot
@@ -61,8 +62,7 @@ DROP TABLE IF EXISTS `exchange`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `exchange` (
-  `ID` varchar(20) COLLATE utf16_bin NOT NULL,Warning: Using a password on the command line interface can be insecure.
-
+  `ID` varchar(20) COLLATE utf16_bin NOT NULL,
   `EXCHANGE` varchar(20) COLLATE utf16_bin NOT NULL,
   `NAME` varchar(20) COLLATE utf16_bin DEFAULT NULL,
   `OPEN` varchar(20) COLLATE utf16_bin DEFAULT NULL,
@@ -339,4 +339,4 @@ CREATE TABLE `watchlist` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-11 10:05:48
+-- Dump completed on 2015-03-01 12:45:24

@@ -212,16 +212,22 @@ public class TechnicalAnalysis {
 		
 		logger.debug("Running stochastic oscillator calculation for " + symbol + " the last " + days + " days!");
 		
+		// Create the time series
 		TimeSeries series = this.getSeriesByDays(symbol, startDate, days, true);
-		int timeFrame = series.getTickCount();
 		
-		if (timeFrame > 0) {
-			StochasticOscillatorKIndicator soki = new StochasticOscillatorKIndicator(series, timeFrame);
-			ret =soki.getValue(timeFrame).toDouble(); 
+		// Get the tick count or size of the series
+		int tickCount = series.getTickCount();
+		
+		if (tickCount > 0) {
+			// Create a new stochasic oscillator indicator
+			StochasticOscillatorKIndicator soki = new StochasticOscillatorKIndicator(series, tickCount);
+			
+			// Return the last value
+			ret = soki.getValue(tickCount - 1).toDouble(); 
 		} 
 		
 		long end = System.currentTimeMillis();
-		System.out.println("getStochasticOscillatorKIndicator - Processing symbol " + symbol + "(" + startDate + ", " + days + ") took " + (end - start) + " msecs...");
+		//System.out.println("getStochasticOscillatorKIndicator - Processing symbol " + symbol + "(" + startDate + ", " + days + ") took " + (end - start) + " msecs...");
 
 		return ret;
 	}
