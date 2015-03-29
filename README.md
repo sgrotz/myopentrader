@@ -14,8 +14,8 @@ MOT is distributed under the GPL v3 License and is free to use for everyone with
  
  
 IMPORTANT LINKS:
-* [MyOpentrader.org] (http://www.myopentrader.org)
-* [wiki.myopentrader.org] (http://wiki.myopentrader.org)
+* [MyOpentrader.org] (https://www.myopentrader.org)
+* [wiki.myopentrader.org] (https://wiki.myopentrader.org)
 * [forum.myopentrader.org] (http://forum.myopentrader.org)
 * [Download the binaries from Github] (https://github.com/sgrotz/myopentrader/releases)
 * [Download the sources from Github] (https://github.com/sgrotz/myopentrader)
@@ -43,4 +43,4 @@ The easiest way to get started is:
 
 Happy trading :)
 
-Take a look at the wiki for more detailed information (http://wiki.myopentrader.org)
+Take a look at the wiki for more detailed information (https://wiki.myopentrader.org)

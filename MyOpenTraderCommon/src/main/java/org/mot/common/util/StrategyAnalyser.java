@@ -56,54 +56,58 @@ public class StrategyAnalyser {
 	
 	public String getAnalysisAsString(ArrayList<StrategyAnalysis> arrayList)  {
 		
-		StringBuilder sb = new StringBuilder();
-
-		Double pnl = 0.0;
-		Double txn = 0.0;
-		Double invest = 0.0;
-		int tradeCount = 0;
-		
-		for (int i = 0; i < arrayList.size();i++) {
-			StrategyAnalysis single = arrayList.get(i);
-			sb.append("Strategy: " + single.getName() + " - PNL " + single.getPnL() + " - TxnCosts: " + single.getTxnCost() + " - Trades: " + single.getTradeCount()).append("\n");
-			invest = invest + (single.getQuantity() * single.getPrice());
-			pnl = pnl + single.getPnL();
-			txn = txn + single.getTxnCost();
-			tradeCount = tradeCount + single.getTradeCount();
+		if (arrayList.size() > 0) {
+			StringBuilder sb = new StringBuilder();
+	
+			Double pnl = 0.0;
+			Double txn = 0.0;
+			Double invest = 0.0;
+			int tradeCount = 0;
+			
+			for (int i = 0; i < arrayList.size();i++) {
+				StrategyAnalysis single = arrayList.get(i);
+				sb.append("Strategy: " + single.getName() + " - PNL " + single.getPnL() + " - TxnCosts: " + single.getTxnCost() + " - Trades: " + single.getTradeCount()).append("\n");
+				invest = invest + (single.getQuantity() * single.getPrice());
+				pnl = pnl + single.getPnL();
+				txn = txn + single.getTxnCost();
+				tradeCount = tradeCount + single.getTradeCount();
+			}
+			
+			OrderDAO od = new OrderDAO();
+			DateBuilder db = new DateBuilder();
+			
+			String startDate = od.getFirstOrderDate();
+			String endDate = od.getLastOrderDate();
+			Long diffDays = db.calculateDifferenceInDays(startDate, endDate, "yyyy-MM-dd HH:mm:ss.SSS");
+			
+			if (diffDays == 0) {
+				// Diffdays is always at least 1 
+				diffDays = (long) 1;
+			}
+			
+			Double total = pnl - txn;
+			Double profitPct = total / invest * 100;
+			
+			sb.append("*** PNL is: " + cf.round(pnl,2) + " minus the transaction costs of: " + cf.round(txn,2)).append("\n");
+			sb.append("* Total amount of trades: " + tradeCount).append("\n");
+			sb.append("* First order date: " + startDate).append("\n");
+			sb.append("* Last order date: " + endDate).append("\n");
+			sb.append("* Total traded days: " + diffDays).append("\n");
+			sb.append("* Total Win/Loss: " + cf.round(total,2)+ "$").append("\n");
+			sb.append("* Total investment: " + cf.round(invest, 2)+ "$").append("\n");
+			sb.append("* Profit vs Investment Pct: " + cf.round(profitPct,2) + "%").append("\n");
+			
+			Double annualInvestPct = profitPct / diffDays * 200;
+			sb.append("* Investment Pct annualized: " + cf.round(annualInvestPct,2)+ "%").append("\n");
+			
+			Double annualProfit = invest / 100 * annualInvestPct;
+			sb.append("* Profit annualized: " + cf.round(annualProfit,2)+ "$").append("\n");
+			sb.append("***").append("\n");
+			
+			return sb.toString();
+		} else {
+			return null; 
 		}
-		
-		OrderDAO od = new OrderDAO();
-		DateBuilder db = new DateBuilder();
-		
-		String startDate = od.getFirstOrderDate();
-		String endDate = od.getLastOrderDate();
-		Long diffDays = db.calculateDifferenceInDays(startDate, endDate, "yyyy-MM-dd HH:mm:ss.SSS");
-		
-		if (diffDays == 0) {
-			// Diffdays is always at least 1 
-			diffDays = (long) 1;
-		}
-		
-		Double total = pnl - txn;
-		Double profitPct = total / invest * 100;
-		
-		sb.append("*** PNL is: " + cf.round(pnl,2) + " minus the transaction costs of: " + cf.round(txn,2)).append("\n");
-		sb.append("* Total amount of trades: " + tradeCount).append("\n");
-		sb.append("* First order date: " + startDate).append("\n");
-		sb.append("* Last order date: " + endDate).append("\n");
-		sb.append("* Total traded days: " + diffDays).append("\n");
-		sb.append("* Total Win/Loss: " + cf.round(total,2)+ "$").append("\n");
-		sb.append("* Total investment: " + cf.round(invest, 2)+ "$").append("\n");
-		sb.append("* Profit vs Investment Pct: " + cf.round(profitPct,2) + "%").append("\n");
-		
-		Double annualInvestPct = profitPct / diffDays * 200;
-		sb.append("* Investment Pct annualized: " + cf.round(annualInvestPct,2)+ "%").append("\n");
-		
-		Double annualProfit = invest / 100 * annualInvestPct;
-		sb.append("* Profit annualized: " + cf.round(annualProfit,2)+ "$").append("\n");
-		sb.append("***").append("\n");
-		
-		return sb.toString();
 	}
 
 
