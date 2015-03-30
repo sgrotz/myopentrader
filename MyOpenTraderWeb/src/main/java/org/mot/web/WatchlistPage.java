@@ -16,6 +16,7 @@ import org.mot.common.tools.PropertiesFactory;
 import org.mot.web.dp.SortableStrategyDataProvider;
 import org.mot.web.dp.SortableWatchlistDataProvider;
 import org.mot.web.link.BookMarkableLink;
+import org.mot.web.panel.FooterPanel;
 import org.mot.web.panel.LatestPricePanel;
 import org.mot.web.panel.MenuPanel;
 import org.mot.web.panel.Timestamp;
@@ -30,52 +31,56 @@ public class WatchlistPage extends WebPage {
 	private String pageTitle;
 
 	public String getPageTitle() {
-		return pageTitle; 
+		return pageTitle;
 	}
 
 	public void setPageTitle(String pageTitle) {
 		this.pageTitle = pageTitle;
 	}
 
-
 	@SuppressWarnings("rawtypes")
 	public WatchlistPage(final PageParameters parameters) {
 		PropertiesFactory pf = PropertiesFactory.getInstance();
 		String pathToConfigDir = pf.getConfigDir();
 		try {
-			Configuration config = new PropertiesConfiguration(pathToConfigDir + "/config.properties");
+			Configuration config = new PropertiesConfiguration(pathToConfigDir
+					+ "/config.properties");
 			String symbol = String.valueOf(parameters.get("symbol"));
 			this.setPageTitle(String.valueOf(parameters.get("pageTitle")));
 
 			// Static content
-			add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
-			add(new Timestamp("TimeStamp"));
-			add(new Label("pageTitle", String.valueOf(parameters.get("pageTitle"))));
+			// Add the footer - this should be on each page!
+			add(new FooterPanel("footer"));
+
+			add(new Label("pageTitle", String.valueOf(parameters
+					.get("pageTitle"))));
 			add(new BookMarkableLink("HOME", HomePage.class, "MyOpenTraderHome"));
 			add(new MenuPanel("menu"));
 			add(new LatestPricePanel("pricePanel"));
-			
-			
+
 			// Data Table
 			List<IColumn> columns = new ArrayList<IColumn>();
-			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>("ID"), "ID"));
-			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>("Name"), "name"));
-			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>("Symbol"), "symbol"));
-			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>("Exchange"), "exchange"));
-			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>("Enabled"), "Enabled"));
-			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>("Type"), "type"));
-			
+			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>(
+					"ID"), "ID"));
+			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>(
+					"Name"), "name"));
+			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>(
+					"Symbol"), "symbol"));
+			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>(
+					"Exchange"), "exchange"));
+			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>(
+					"Enabled"), "Enabled"));
+			columns.add((IColumn<?, ?>) new PropertyColumn(new Model<String>(
+					"Type"), "type"));
+
 			final SortableWatchlistDataProvider ssdp = new SortableWatchlistDataProvider();
-			
+
 			add(new DefaultDataTable("watchlistTable", columns, ssdp, 15));
-			
-			
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 
 	}
 

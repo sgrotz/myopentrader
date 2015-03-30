@@ -1,11 +1,10 @@
-package org.mot.web.server;
+package org.mot.common.server;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
-import org.apache.wicket.util.time.Duration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.SslConnectionFactory;
@@ -19,6 +18,7 @@ public class EmbeddedWebServer {
 
 		Options options = new Options();
 		options.addOption("c", true, "Config directory");
+		options.addOption("w", true, "Path to WAR file, containing web-app");
 		options.addOption("p", true,
 				"Specify a port to start webserver (default: 8082)");
 		options.addOption("s", true,
@@ -56,14 +56,18 @@ public class EmbeddedWebServer {
 		if (cmd.getOptionValue("s") != null) {
 			SSLport = Integer.valueOf(cmd.getOptionValue("s"));
 		}
-
-		int timeout = (int) Duration.ONE_HOUR.getMilliseconds();
+		
+		String path ="../resources/MyOpenTraderWeb.war";
+		// Overwrite the path to the war file
+		if (cmd.getOptionValue("w") != null) {
+			path = String.valueOf(cmd.getOptionValue("w"));
+		}
 
 		Server server = new Server();
 		ServerConnector connector = new ServerConnector(server);
 
 		// Set some timeout options to make debugging easier.
-		connector.setIdleTimeout(timeout);
+		connector.setIdleTimeout(3600000);
 		connector.setSoLingerTime(-1);
 		connector.setPort(port);
 		server.addConnector(connector);
@@ -87,7 +91,7 @@ public class EmbeddedWebServer {
 
 			ServerConnector sslConnector = new ServerConnector(server,
 					new SslConnectionFactory());
-			sslConnector.setIdleTimeout(timeout);
+			sslConnector.setIdleTimeout(3600000);
 			sslConnector.setPort(SSLport);
 			server.addConnector(sslConnector);
 
@@ -102,7 +106,9 @@ public class EmbeddedWebServer {
 		WebAppContext bb = new WebAppContext();
 		bb.setServer(server);
 		bb.setContextPath("/");
-		bb.setWar("src/main/webapp");
+		//bb.setWar("src/main/webapp");
+		//bb.setWar("D:/Data/GitHub/myopentrader/MyOpenTraderBin/resources/MyOpenTraderWeb-0.0.15.war");
+		bb.setWar(path);
 
 		// START JMX SERVER
 		// MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();

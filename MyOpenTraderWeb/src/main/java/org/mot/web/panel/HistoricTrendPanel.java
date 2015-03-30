@@ -14,7 +14,7 @@ public class HistoricTrendPanel extends Panel {
 
 	public HistoricTrendPanel(String id, final String symbol) {
 		super(id);
-	
+
 		final List list = new ArrayList();
 		list.add(1);
 		list.add(2);
@@ -23,27 +23,32 @@ public class HistoricTrendPanel extends Panel {
 		list.add(50);
 		list.add(100);
 		list.add(200);
-		
-		final CalculatorFactory cf = new CalculatorFactory();
-		
-	    add( new ListView("HistoricTrendList", list ) 
-	    { 
 
-				@Override
-				protected void populateItem(ListItem item) {
-					// TODO Auto-generated method stub
-					int length = (int) item.getModelObject();
-					
-					//item.add(new Label("Age", length + "day: " +  new TrendCalculator(symbol, length, "1 day").getPriceDifferenceInPct()));
-					item.add(new Label("Age", length + ": " +  cf.round((new TrendCalculator(symbol, length, "1 day", "BID", true).getPriceDifferenceInPct()),2)));
-					
-				} 
-	    }); 
-	    
-	    // Historic Trend Panel does not need to refresh itself
-	    // add(new AjaxSelfUpdatingTimerBehavior(Duration.seconds(60)));
-	    
+		final CalculatorFactory cf = new CalculatorFactory();
+
+		add(new ListView("HistoricTrendList", list) {
+
+			@Override
+			protected void populateItem(ListItem item) {
+				// TODO Auto-generated method stub
+				int length = (int) item.getModelObject();
+
+				// item.add(new Label("Age", length + "day: " + new
+				// TrendCalculator(symbol, length,
+				// "1 day").getPriceDifferenceInPct()));
+				item.add(new Label("Age",
+						length
+								+ ": "
+								+ cf.round((new TrendCalculator(symbol, length,
+										"1 day", "BID", true)
+										.getPriceDifferenceInPct()), 2)));
+
+			}
+		});
+
+		// Historic Trend Panel does not need to refresh itself
+		// add(new AjaxSelfUpdatingTimerBehavior(Duration.seconds(60)));
+
 	}
-	
-	
+
 }

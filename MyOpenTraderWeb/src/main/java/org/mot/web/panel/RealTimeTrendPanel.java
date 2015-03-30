@@ -27,41 +27,44 @@ public class RealTimeTrendPanel extends Panel {
 
 	public RealTimeTrendPanel(String id, final String symbol) {
 		super(id);
-	
+
 		TickPriceDAO tpd = new TickPriceDAO();
 		final int tickCount = tpd.getTickCount(symbol, "ASK");
-		
-		
+
 		final List list = new ArrayList();
 		list.add(tickCount / 100 * 10);
 		list.add(tickCount / 100 * 25);
 		list.add(tickCount / 100 * 50);
 		list.add(tickCount / 100 * 75);
 		list.add(tickCount);
-		
+
 		final CalculatorFactory cf = new CalculatorFactory();
 
 		add(new Label("TotalCount", tickCount));
 		add(new Label("Symbol", symbol));
-		
-	    add( new ListView("TrendList", list ) 
-	    { 
 
-				@Override
-				protected void populateItem(ListItem item) {
-					// TODO Auto-generated method stub
-					int length = (int) item.getModelObject();
-					
-					//item.add(new Label("Age", length + "day: " +  new TrendCalculator(symbol, length, "1 day").getPriceDifferenceInPct()));
-					item.add(new Label("Age", length + ": " +  cf.round((new TrendCalculator(symbol, length, "DOESNOTMATTER", "BID", false).getPriceDifferenceInPct()), 2)));
-					
-				} 
-	    }); 
-	    
-	    // Historic Trend Panel does not need to refresh itself
-	    add(new AjaxSelfUpdatingTimerBehavior(Duration.seconds(30)));
-	    
+		add(new ListView("TrendList", list) {
+
+			@Override
+			protected void populateItem(ListItem item) {
+				// TODO Auto-generated method stub
+				int length = (int) item.getModelObject();
+
+				// item.add(new Label("Age", length + "day: " + new
+				// TrendCalculator(symbol, length,
+				// "1 day").getPriceDifferenceInPct()));
+				item.add(new Label("Age", length
+						+ ": "
+						+ cf.round((new TrendCalculator(symbol, length,
+								"DOESNOTMATTER", "BID", false)
+								.getPriceDifferenceInPct()), 2)));
+
+			}
+		});
+
+		// Historic Trend Panel does not need to refresh itself
+		add(new AjaxSelfUpdatingTimerBehavior(Duration.seconds(30)));
+
 	}
-	
-	
+
 }

@@ -18,7 +18,8 @@
 	-moz-border-radius-topleft:0px;
 	-webkit-border-top-left-radius:0px;
 	border-top-left-radius:0px;
-}.motTable table{
+}
+.motTable table{
     border-collapse: collapse;
         border-spacing: 0;
 	width:100%;
@@ -58,7 +59,8 @@
 	font-family:Arial;
 	font-weight:normal;
 	color:#000000;
-}.motTable tr:last-child td{
+}
+.motTable tr:last-child td{
 	border-width:0px 1px 0px 0px;
 }.motTable tr td:last-child{
 	border-width:0px 0px 1px 0px;
@@ -91,4 +93,37 @@
 }
 .motTable tr:first-child td:last-child{
 	border-width:0px 0px 1px 1px;
+}
+.default {
+	font-family:Arial;
+}
+.footer {
+	font-family:Arial;
+	font-size: small;
+	text-align: center;
+	font-style: italic;
+}
+.smallCentered {
+	font-family:Arial;
+	font-size: small;
+	text-align: center;
+}
+.small {
+	font-family:Arial;
+	font-size: small;
+	text-align: center;
+}
+.Header {
+	font-family:Arial;
+	font-weight: bold;
+	text-align: center;
+}
+.menuItem {
+	font-family:Arial;
+	font-size: small;
+}
+.menuHeader {
+	font-family:Arial;
+	font-size: small;
+	font-weight: bold;
 }

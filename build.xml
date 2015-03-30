@@ -9,8 +9,9 @@
     <!-- WINDOWS BUILD PROPERTIES -->
     <property name="root.Dir" location="${basedir}"/>
     <property name="buildDir" location="${root.Dir}/MyOpenTraderBin"/>
+    <property name="sharedDir" location="X:/Google Drive/Development/MyOpenTrader"/>
     
-    <property name="version" value="0.1.1"/>
+    <property name="version" value="0.1.2"/>
 
     <target name="build">
     
@@ -49,10 +50,25 @@
 	 <fileset file="${root.Dir}/README.md"/>
 	 <fileset file="${root.Dir}/LICENSE"/>
   	</copy>	
+  	
+  	<!-- Copy the WAR file to the resources folder ... -->
+  	<copy todir="${buildDir}/resources">
+	 <fileset dir="${root.Dir}/MyOpenTraderWeb/target/">
+	   <include name="*.war"/>
+ 	 </fileset>
+	</copy>
 
 	<!-- <antcall target="download-usage-guide"/>  -->
-	<antcall target="dump-database"/>  
+	<antcall target="dump-database"/> 
+	<antcall target="zipSource"/>  
 	<antcall target="zip"/>  
+	
+	<!-- Backup the files to a shared local drive - development purpose only!! -->
+	<copy todir="${sharedDir}/">
+	 <fileset file="${root.Dir}/MyOpenTrader-${version}-bin.zip"/>
+	 <fileset file="${root.Dir}/MyOpenTrader-${version}-src.zip"/>
+  	</copy>	
+	
 	
     </target>
     
@@ -81,8 +97,19 @@
 	</zip>
     </target>
     
+    <target name="zipSource">
+    	<!-- Create a new zip file for all sources -->
+    	<zip destfile="${root.Dir}/MyOpenTrader-${version}-src.zip" excludes="*.class">
+    	  <fileset dir="${basedir}"> 
+    	    <include name="MyOpenTrader*/src/**" /> 
+      	  </fileset> 
+    	</zip>
+    </target>
+    
     <target name="clean">
     	<delete file="${root.Dir}/MyOpenTrader-${version}-bin.zip"/>
+    	<delete file="${root.Dir}/MyOpenTrader-${version}-src.zip"/>
+    	<delete file="${buildDir}/resources/MyOpenTraderWeb.war"/>
     	<delete dir="${root.Dir}/data"/>
     	<delete file="${buildDir}/version"/>
         <delete dir="${buildDir}/libs"/>

@@ -23,7 +23,7 @@
 	<groupId>org.mot.web</groupId>
 	<artifactId>MyOpenTraderWeb</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.14</version>
+	<version>0.0.15</version>
 	<name>MyOpenTraderWeb</name>
 	<description>This package is part of the MyOpenTrader Open Source Trading Engine. For more information, please visit us http://www.myopentrader.org. Thanks!</description>
 	<url>http://api.myopentrader.org</url>
@@ -36,11 +36,12 @@
 		</license>
 	</licenses>
 	<properties>
-		<wicket.version>6.14.0</wicket.version>
-		<jetty.version>7.6.13.v20130916</jetty.version>
+		<wicket.version>6.19.0</wicket.version>
+		<jetty.version>9.2.10.v20150310</jetty.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- allowed values: R7, 1.0, 1.5, 2.0 or none -->
 		<wtp.version>none</wtp.version>
+		<shiro.version>1.2.3</shiro.version>
 	</properties>
 	<dependencies>
 		<!--  WICKET DEPENDENCIES -->
@@ -86,21 +87,15 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--  JETTY DEPENDENCIES FOR TESTING  -->
-		<dependency>
-			<groupId>org.eclipse.jetty.aggregate</groupId>
-			<artifactId>jetty-all-server</artifactId>
-			<version>${jetty.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		
+
+		<!-- Google Wicket Charts -->		
 		<dependency>
   			<groupId>com.googlecode.wicked-charts</groupId>
   			<artifactId>wicked-charts-wicket6</artifactId>
   			<version>1.5.0</version>
 		</dependency>
 		
-
+		<!-- Required Apache commons configuration -->
  		<dependency>
 			<groupId>commons-configuration</groupId>
 			<artifactId>commons-configuration</artifactId>
@@ -122,15 +117,32 @@
 			<version>1.1.3</version>
 		</dependency>
 		
+		<!-- The main MyOpenTrader Common files ...-->
 		<dependency>
   			<groupId>org.mot.common</groupId>
   			<artifactId>MyOpenTraderCommon</artifactId>
   			<version>LATEST</version>			
 		</dependency>	
+		
+		
+		<!-- Dependencies for Apache SHIRO - authentication framework -->
+		<dependency>
+		  <groupId>org.apache.shiro</groupId>
+		  <artifactId>shiro-core</artifactId>
+		  <version>${shiro.version}</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.shiro</groupId>
+		  <artifactId>shiro-web</artifactId>
+		  <version>${shiro.version}</version>
+		</dependency>	
+		
+
+
 					
 	</dependencies>
 	<build>
-	<finalName>${project.artifactId}-${project.version}</finalName>
+	<finalName>${project.artifactId}</finalName>
 		<resources>
 			<resource>
 				<filtering>false</filtering>
@@ -177,14 +189,15 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
+			
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
+				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty.version}</version>
 				<configuration>
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-							<port>8080</port>
+							<port>8082</port>
 							<maxIdleTime>3600000</maxIdleTime>
 						</connector>
 						<connector implementation="org.eclipse.jetty.server.ssl.SslSocketConnector">

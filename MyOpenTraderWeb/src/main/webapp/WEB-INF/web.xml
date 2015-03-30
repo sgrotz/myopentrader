@@ -4,17 +4,41 @@
 	version="2.5">
 
 	<display-name>MyOpenTraderWeb</display-name>
+	<!--<context-param>
+		<param-name>configuration</param-name>
+		<param-value>deployment</param-value>
+	</context-param> -->
+	
 
-	<!--
-		There are three means to configure Wickets configuration mode and they 
-		are tested in the order given.
-		
-		1) A system property: -Dwicket.configuration 
-		2) servlet specific <init-param> 
-		3) context specific <context-param>
+	<!-- SHIRO specific listener & filter -->
+	<listener>
+	    <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+	</listener>
+	
+	<context-param>
+	    <param-name>shiroConfigLocations</param-name>
+	    <param-value>/WEB-INF/conf/shiro.ini</param-value>
+	</context-param>
 
-		The value might be either "development" (reloading when templates change) or 
-		"deployment". If no configuration is found, "development" is the default. -->
+	<filter>
+	    <filter-name>ShiroFilter</filter-name>
+	    <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+	    <filter-name>ShiroFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+	    <dispatcher>REQUEST</dispatcher>
+	    <dispatcher>FORWARD</dispatcher>
+	    <dispatcher>INCLUDE</dispatcher>
+	    <dispatcher>ERROR</dispatcher>
+	</filter-mapping>
+	
+	<session-config>
+	  <!-- web.xml expects the session timeout in minutes: -->
+	  <session-timeout>30</session-timeout>
+	</session-config>
+
 
 	<filter>
 		<filter-name>wicket.MyOpenTraderWeb</filter-name>
@@ -30,15 +54,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters
-<context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>WEB-INF/conf/applicationContext.xml</param-value>
-</context-param>
-
-<listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-</listener>
- -->
+	
  
 </web-app>

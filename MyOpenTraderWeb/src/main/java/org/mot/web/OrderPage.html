@@ -27,14 +27,25 @@
           
           <table width="100%" border="0" class="dataview">
             <tr>
-              <td><table width="100%" border="0">
+              <td>
+              <table width="100%" border="0">
+                <tr>
+                	<td><label class="default">All orders:</label></td>
+                </tr>
                 <tr>
                   <td><div class="motTable"><table cellspacing="0" wicket:id="orderTable">[table]</table></div></td>
                 </tr>
                 <tr>
+                	<td><p>&nbsp;</p></td>
+                </tr>                
+                <tr>
+                	<td><label class="default">All closed orders:</label></td>
+                </tr>
+                <tr>
                   <td><table class="motTable" cellspacing="0" wicket:id="closedOrderTable">[table]</table></td>
                 </tr>
-              </table></td>
+              </table>
+              </td>
             </tr>
     </table>
           </td>
@@ -42,7 +53,10 @@
     </table></td>
   </tr>
   <tr>
-    <td class="Footer"><span wicket:id="TimeStamp"/> - Copyright (c) 2013 by <a href="http://www.myopentrader.org">http://www.myopentrader.org</a> - Powered by Wicket V:<span wicket:id="version"/></td>
+    <td class="footer">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="footer"><div wicket:id="footer"/></td>
   </tr>
 </table>
 </body>

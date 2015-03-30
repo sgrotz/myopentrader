@@ -19,37 +19,35 @@ public class LatestPricePanel extends Panel {
 	public LatestPricePanel(String id) {
 		super(id);
 
-		
 		WatchListDAO wld = new WatchListDAO();
 		TickPriceDAO tp = new TickPriceDAO();
-		
+
 		WatchList[] watchList = wld.getWatchlistAsObject();
 		Tick[] linkList = new Tick[watchList.length];
-		
+
 		for (int i = 0; i < watchList.length; i++) {
-			linkList[i] = tp.getLastPriceForSymbolAsObject(watchList[i].getSymbol(), "LAST");
+			linkList[i] = tp.getLastPriceForSymbolAsObject(
+					watchList[i].getSymbol(), "LAST");
 		}
-		
+
 		// Convert List to an array
-		final List list = Arrays.asList(linkList); 
-	    
-	    add( new ListView<Tick>("tickList", list ) 
-	    { 
+		final List list = Arrays.asList(linkList);
 
-				@Override
-				protected void populateItem(ListItem item) {
-					// TODO Auto-generated method stub
-					Tick tick = (Tick) item.getModelObject();
-					
-					item.add(new Label("Symbol", tick.getSymbol() + "@" + tick.getPrice()));
-					
-				} 
-	    }); 
-	    
-	    add(new AjaxSelfUpdatingTimerBehavior(Duration.seconds(5)));
+		add(new ListView<Tick>("tickList", list) {
 
-	    
+			@Override
+			protected void populateItem(ListItem item) {
+				// TODO Auto-generated method stub
+				Tick tick = (Tick) item.getModelObject();
+
+				item.add(new Label("Symbol", tick.getSymbol() + "@"
+						+ tick.getPrice()));
+
+			}
+		});
+
+		add(new AjaxSelfUpdatingTimerBehavior(Duration.seconds(5)));
+
 	}
-	
-	
+
 }

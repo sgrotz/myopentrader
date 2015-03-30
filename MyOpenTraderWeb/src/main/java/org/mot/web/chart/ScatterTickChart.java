@@ -56,17 +56,13 @@ public class ScatterTickChart extends Chart {
 	private static final long serialVersionUID = 1L;
 	private String symbol;
 
-
-	public void setSymbol(String symbol) { 
+	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
 
 	public String getSymbol() {
 		return symbol;
 	}
-
-
-
 
 	public ScatterTickChart(String name, final String symbol, int refresh) {
 		super(name, new Options());
@@ -95,7 +91,7 @@ public class ScatterTickChart extends Chart {
 
 		Axis yAxis = new Axis();
 		yAxis.setTitle(new Title("Count"));
-		
+
 		o.setyAxis(yAxis);
 
 		Legend legend = new Legend();
@@ -121,7 +117,7 @@ public class ScatterTickChart extends Chart {
 
 		StatesChoice statesChoice = new StatesChoice();
 		statesChoice.setHover(hoverState);
-		
+
 		Marker marker = new Marker();
 		marker.setEnabled(Boolean.TRUE);
 		marker.setRadius(5);
@@ -135,19 +131,23 @@ public class ScatterTickChart extends Chart {
 		plotOptionsChoice.setScatter(plotOptions);
 		o.setPlotOptions(plotOptionsChoice);
 
-		//Tick[] askTicks = new TickPriceDAO().getPriceForStockAsObjectOrderByPrice(symbol, "ASK", 5000);
-		Hashtable<Double, Integer> scatterList = new TickPriceDAO().getTickScatter(symbol, "BID");
-		
+		// Tick[] askTicks = new
+		// TickPriceDAO().getPriceForStockAsObjectOrderByPrice(symbol, "ASK",
+		// 5000);
+		Hashtable<Double, Integer> scatterList = new TickPriceDAO()
+				.getTickScatter(symbol, "BID");
+
 		List<Coordinate<Double, Integer>> scatterData = new ArrayList<Coordinate<Double, Integer>>();
-		
-	    Set<Entry<Double, Integer>> set = scatterList.entrySet();
-	    Iterator<Entry<Double, Integer>> it = set.iterator();
-	    while (it.hasNext()) {
-	      Map.Entry<Double, Integer> entry = (Map.Entry<Double, Integer>) it.next();
-	      scatterData.add(new Coordinate<Double, Integer>(entry.getKey(), entry.getValue()));
-	    }
-		
-		
+
+		Set<Entry<Double, Integer>> set = scatterList.entrySet();
+		Iterator<Entry<Double, Integer>> it = set.iterator();
+		while (it.hasNext()) {
+			Map.Entry<Double, Integer> entry = (Map.Entry<Double, Integer>) it
+					.next();
+			scatterData.add(new Coordinate<Double, Integer>(entry.getKey(),
+					entry.getValue()));
+		}
+
 		CustomCoordinatesSeries<Double, Integer> series1 = new CustomCoordinatesSeries<Double, Integer>();
 		series1.setColor(new RgbaColor(111, 83, 83, 0.5f));
 		series1.setName("BID");
@@ -156,6 +156,5 @@ public class ScatterTickChart extends Chart {
 
 		super.setOptions(o);
 	}
-
 
 }

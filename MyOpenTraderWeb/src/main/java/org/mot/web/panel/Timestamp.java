@@ -15,24 +15,23 @@ public class Timestamp extends Panel {
 	public Timestamp(String id) {
 		super(id);
 		// TODO Auto-generated constructor stub
-		
+
 		// Server time Label
 		Label time = new Label("time", new Model() {
-		
 
 			private static final long serialVersionUID = -4992940551255653329L;
 
 			@Override
-		    public Serializable getObject() {
-		    	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		    	java.util.Date date = new java.util.Date();
-		        return dateFormat.format(date);
-		    }
-			
-		}); 
+			public Serializable getObject() {
+				DateFormat dateFormat = new SimpleDateFormat(
+						"yyyy/MM/dd HH:mm:ss");
+				java.util.Date date = new java.util.Date();
+				return dateFormat.format(date);
+			}
+
+		});
 		time.add(new AjaxSelfUpdatingTimerBehavior(Duration.seconds(1)));
 		add(time);
 	}
-	
-	
+
 }

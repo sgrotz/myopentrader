@@ -19,9 +19,9 @@ public class StaticDataPanel extends Panel {
 		// TODO Auto-generated constructor stub
 
 		StaticDataDAO sdd = new StaticDataDAO();
-		
+
 		StaticData sd = sdd.getLastStaticDataAsObject(symbol);
-		
+
 		add(new Label("range", sd.getRange()));
 		add(new Label("yearrange", sd.getYearRange()));
 		add(new Label("open", sd.getOpen()));
@@ -32,10 +32,9 @@ public class StaticDataPanel extends Panel {
 		add(new Label("eps", sd.getEps()));
 		add(new Label("shares", sd.getShares()));
 		add(new Label("beta", sd.getBeta()));
-		
+
 		add(new AjaxSelfUpdatingTimerBehavior(Duration.minutes(30)));
-		
-		
+
 	}
 
 }

@@ -4,11 +4,16 @@
   <groupId>org.mot.common</groupId>
   <artifactId>MyOpenTraderCommon</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.17</version>
+  <version>0.0.18</version>
   <name>MyOpenTraderCommon</name>
   <description>This package is part of the MyOpenTrader Open Source Trading Engine. For more information, please visit us http://www.myopentrader.org. Thanks!</description>
   <url>http://api.myopentrader.org</url>
   <inceptionYear>2012</inceptionYear>
+
+<properties>
+	<jetty.version>9.2.10.v20150310</jetty.version>
+</properties>  
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -192,6 +197,40 @@
 	    <version>1.5.2</version>
 	</dependency>
 	
+	
+		<!-- Embedded Jetty & JSP Support -->
+		<dependency>
+		  <groupId>org.eclipse.jetty</groupId>
+		  <artifactId>jetty-server</artifactId>
+		  <version>${jetty.version}</version>
+		</dependency>
+		
+	    	<dependency>
+		  <groupId>org.eclipse.jetty</groupId>
+		  <artifactId>jetty-webapp</artifactId>
+		  <version>${jetty.version}</version>
+	    	</dependency>
+	    	<dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-security</artifactId>
+		    <version>${jetty.version}</version>
+   		</dependency>
+	    	<dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-http</artifactId>
+		    <version>${jetty.version}</version>
+   		</dependency>
+   		<dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-servlet</artifactId>
+		    <version>${jetty.version}</version>
+   		</dependency>
+   		<dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-io</artifactId>
+		    <version>${jetty.version}</version>
+   		</dependency>
+   			
        
   </dependencies>
   	<build>

@@ -432,6 +432,37 @@ public class OrderDAO {
 		return list; 
 	}
 	
+	public ArrayList<String> getAllClosedOrderStrategiesBySymbol(String symbol) {
+		
+		ArrayList<String> list = new ArrayList<String>();
+		
+		Connection connection = dcf.getConnection();
+		Statement s;
+		try {
+			s = connection.createStatement ();
+			
+				String query = "SELECT STRATEGY FROM orders where STATUS like '%CLOSED%' and STRATEGY ='" + symbol + "' group by STRATEGY order by TIMESTAMP desc";
+			
+	    		logger.debug(query);
+		    	ResultSet rs = s.executeQuery(query);
+
+		    	while (rs.next()) {
+		    		list.add(rs.getString("STRATEGY"));
+		    	}
+
+		    	s.close();
+		    	dcf.disconnect(connection);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dcf.disconnect(connection);
+		}
+		
+		return list; 
+	}
+	
 	
 	public Order[] getAllClosedOrdersByStrategy(String strategy) {
 		
@@ -468,6 +499,8 @@ public class OrderDAO {
 
 		return list.toArray(orders); 
 	}
+	
+
 	
 	
 	/**

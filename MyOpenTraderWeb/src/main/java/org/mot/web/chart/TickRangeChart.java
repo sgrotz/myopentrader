@@ -43,17 +43,13 @@ public class TickRangeChart extends Chart {
 	private static final long serialVersionUID = 1L;
 	private String symbol;
 
-
-	public void setSymbol(String symbol) { 
+	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
 
 	public String getSymbol() {
 		return symbol;
 	}
-
-
-
 
 	public TickRangeChart(String name, final String symbol, int refresh) {
 		super(name, new Options());
@@ -82,7 +78,7 @@ public class TickRangeChart extends Chart {
 
 		Axis yAxis = new Axis();
 		yAxis.setTitle(new Title("Count"));
-		
+
 		o.setyAxis(yAxis);
 
 		Legend legend = new Legend();
@@ -108,7 +104,7 @@ public class TickRangeChart extends Chart {
 
 		StatesChoice statesChoice = new StatesChoice();
 		statesChoice.setHover(hoverState);
-		
+
 		Marker marker = new Marker();
 		marker.setEnabled(Boolean.TRUE);
 		marker.setRadius(5);
@@ -124,33 +120,35 @@ public class TickRangeChart extends Chart {
 
 		// Get the ticks for the last 5 days
 		DateBuilder db = new DateBuilder();
-		String pattern =  "yyyy-MM-dd";
+		String pattern = "yyyy-MM-dd";
 		String end = db.getTimeStampWithPattern(pattern);
 		String start = db.subtractDaysFromDate(end, pattern, 5);
-		
-		ArrayList<Double> askTicks = new TickPriceDAO().getPriceForSymbolByDate(symbol, start, end, "ASK");
-		
-		if (askTicks.size() > 0 ) {
+
+		ArrayList<Double> askTicks = new TickPriceDAO()
+				.getPriceForSymbolByDate(symbol, start, end, "ASK");
+
+		if (askTicks.size() > 0) {
 			Double[] ticks = new Double[askTicks.size()];
 			askTicks.toArray(ticks);
-			 
+
 			// Run the range analyser
 			RangeAnalyser ra = new RangeAnalyser(ticks, false, true, 12);
 			LinkedHashMap<Double, Integer> scatterList = ra.getPriceRange();
-			
-			
-			//Hashtable<Double, Integer> scatterList = new TickPriceDAO().getTickScatter(symbol, "BID");
-			
+
+			// Hashtable<Double, Integer> scatterList = new
+			// TickPriceDAO().getTickScatter(symbol, "BID");
+
 			List<Coordinate<Double, Integer>> scatterData = new ArrayList<Coordinate<Double, Integer>>();
-			
-		    Set<Entry<Double, Integer>> set = scatterList.entrySet();
-		    Iterator<Entry<Double, Integer>> it = set.iterator();
-		    while (it.hasNext()) {
-		      Map.Entry<Double, Integer> entry = (Map.Entry<Double, Integer>) it.next();
-		      scatterData.add(new Coordinate<Double, Integer>(entry.getKey(), entry.getValue()));
-		    }
-			
-			
+
+			Set<Entry<Double, Integer>> set = scatterList.entrySet();
+			Iterator<Entry<Double, Integer>> it = set.iterator();
+			while (it.hasNext()) {
+				Map.Entry<Double, Integer> entry = (Map.Entry<Double, Integer>) it
+						.next();
+				scatterData.add(new Coordinate<Double, Integer>(entry.getKey(),
+						entry.getValue()));
+			}
+
 			CustomCoordinatesSeries<Double, Integer> series1 = new CustomCoordinatesSeries<Double, Integer>();
 			series1.setColor(new RgbaColor(111, 83, 83, 0.5f));
 			series1.setName("ASK");
@@ -160,6 +158,5 @@ public class TickRangeChart extends Chart {
 
 		super.setOptions(o);
 	}
-
 
 }

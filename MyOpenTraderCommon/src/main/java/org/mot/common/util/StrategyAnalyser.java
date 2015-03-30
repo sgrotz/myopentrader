@@ -127,6 +127,23 @@ public class StrategyAnalyser {
 		return result;
 	}
 
+	
+	public ArrayList<StrategyAnalysis> analyseBySymbol(String symbol) {
+		ArrayList<String> listOfStrategies = od.getAllClosedOrderStrategiesBySymbol(symbol);
+		ArrayList<StrategyAnalysis> result = new ArrayList<StrategyAnalysis>(); 
+
+		for (int p = 0; p < listOfStrategies.size(); p++) {
+
+			ArrayList<StrategyAnalysis> a = this.analyseStrategy(listOfStrategies.get(p));
+
+			for (int z = 0; z < a.size(); z++) {
+				result.add(a.get(z));
+			}
+		}
+
+		return result;
+	}
+	
 
 	private ArrayList<StrategyAnalysis> analyseStrategy(String strategyName) {
 		
