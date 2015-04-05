@@ -39,8 +39,21 @@ public class Strategy implements Serializable {
 	private Double Amount; 
 	private boolean simulated; 
 	private Long timestamp;
+	private String c2id;
 
 	
+	/**
+	 * @return the c2id
+	 */
+	public String getC2id() {
+		return c2id;
+	}
+	/**
+	 * @param c2id the c2id to set
+	 */
+	public void setC2id(String c2id) {
+		this.c2id = c2id;
+	}
 	public Double getAmount() {
 		return Amount;
 	}

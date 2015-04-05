@@ -31,6 +31,7 @@ import org.mot.common.db.OrderDAO;
 import org.mot.common.db.WatchListDAO;
 import org.mot.common.mq.ActiveMQFactory;
 import org.mot.common.objects.Order;
+import org.mot.common.tools.Collective2Connector;
 import org.mot.common.tools.PropertiesFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,7 @@ public class OrderEngine {
 	private WatchListDAO wld = new WatchListDAO();
 	private ExchangeDAO ed = new ExchangeDAO();
 	private OrderDAO od = new OrderDAO();
+	private Collective2Connector cc = new Collective2Connector();
 	
 	static Configuration config;
 	static Double txnPct;
@@ -123,7 +125,6 @@ public class OrderEngine {
 					od.markOrderAsClosed(order.getID(), order.getClosed(), order.isForced());
 				}
 			}
-			
 		
 			// Only execute if this is not a simulation
 			if (!order.isSimulated()) { 
@@ -132,6 +133,11 @@ public class OrderEngine {
 				amf.publishOrder(order, mp);
 				amf.closeMessageProducer(mp);
 			}
+			
+			// Pass the order to the collective2Connector, so make sure the order is listed online.
+			// This may be moved to a separate order jms listener at some stage.
+			cc.sendOrderToCollective2(order);
+			
 			
 			return true;
 		} else {

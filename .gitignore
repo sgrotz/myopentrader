@@ -19,6 +19,8 @@ local.properties
 target/
 */javadoc/*
 */libs/*
+*/data/*
+*.war
 
 
 # External tool builders

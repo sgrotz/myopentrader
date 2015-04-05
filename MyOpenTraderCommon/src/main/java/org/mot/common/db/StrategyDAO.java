@@ -138,6 +138,7 @@ public class StrategyDAO implements Serializable {
 		entry.setSymbol(rs.getString("SYMBOL"));
 		entry.setAmount(rs.getDouble("AMOUNT"));
 		entry.setSimulated(rs.getBoolean("SIMULATED"));
+		entry.setC2id(rs.getString("C2ID"));
 		return entry;
 	}
 	
@@ -182,6 +183,12 @@ public class StrategyDAO implements Serializable {
 	}
 
 	
+	/**
+	 * Use this method to query which class a particular strategy uses.
+	 * 
+	 * @param strategy - name of the strategy
+	 * @return - String representation of the Strategy classname
+	 */
 	public String getStrategyClassNameByStrategy(String strategy) {
 
 		Connection connection = dcf.getConnection();
@@ -209,7 +216,43 @@ public class StrategyDAO implements Serializable {
 			dcf.disconnect(connection);
 		}	
 
-		// convert to an array
+		return ret;
+	}
+	
+	
+	/**
+	 * Use this method to query which collective2 id is mapped to a particular strategy.
+	 * 
+	 * @param strategy - Name of the strategy
+	 * @return String representation of the Collective2 Strategy ID
+	 */
+	public String getStrategyC2IDByStrategy(String strategy) {
+
+		Connection connection = dcf.getConnection();
+
+		Statement s;
+		String ret = null;
+
+		try {
+			s = connection.createStatement ();
+			String query = "SELECT C2ID FROM strategies where NAME ='" + strategy + "'";
+			logger.debug(query);
+			ResultSet rs = s.executeQuery(query);
+
+			while(rs.next()) {
+				ret = rs.getString("C2ID");
+				break;
+			}
+			s.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// Make sure the connection always gets closed!
+			dcf.disconnect(connection);
+		}	
+
 		return ret;
 	}
 
