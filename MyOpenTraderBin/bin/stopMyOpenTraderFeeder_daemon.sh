@@ -2,8 +2,8 @@
 
 cd $MOTHOME/bin
 
-kill -9 -$(<"MOT-Feeder_OTHERS.pid")
-kill -9 -$(<"MOT-Feeder_mot1.pid")
-kill -9 -$(<"MOT-Feeder_mot2.pid")
-kill -9 -$(<"MOT-Feeder_mot3.pid")
+pkill -P `cat MOT-Feeder_OTHERS.pid`
+pkill -P `cat MOT-Feeder_mot1.pid`
+pkill -P `cat MOT-Feeder_mot2.pid`
+pkill -P `cat MOT-Feeder_mot3.pid`
 
