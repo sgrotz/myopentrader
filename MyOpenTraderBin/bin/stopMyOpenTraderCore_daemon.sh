@@ -1,8 +1,10 @@
 #!/bin/bash
 
-screen -S coreALL -X quit 
-screen -S coreMot1 -X quit 
-screen -S coreMot2 -X quit 
-screen -S coreMot3 -X quit 
-screen -S coreFX -X quit
+cd $MOTHOME/bin
 
+# Just kill the entire process...
+kill -9 -$(<"MOT-Core_OTHERS.pid")
+kill -9 -$(<"MOT-Core_mot1.pid")
+kill -9 -$(<"MOT-Core_mot2.pid")
+kill -9 -$(<"MOT-Core_mot3.pid")
+kill -9 -$(<"scheduler.pid")

@@ -1,12 +1,11 @@
 #!/bin/bash
 
-screen -A -m -d -L -S feederALL ./runMyOpenTraderFeeder.sh OTHERS
+cd $MOTHOME/bin
+
+nohup ./runMyOpenTraderFeeder.sh -e OTHERS > ../logs/MOT-Feeder_OTHERS.log 2>&1 & echo $! > MOT-Feeder_OTHERS.pid  
 sleep 5
-screen -A -m -d -L -S feederMot1 ./runMyOpenTraderFeeder.sh mot1 
+nohup ./runMyOpenTraderFeeder.sh -e mot1 > ../logs/MOT-Feeder_mot1.log 2>&1 & echo $! > MOT-Feeder_mot1.pid  
 sleep 5
-screen -A -m -d -L -S feederMot2 ./runMyOpenTraderFeeder.sh mot2
+nohup ./runMyOpenTraderFeeder.sh -e mot1 > ../logs/MOT-Feeder_mot2.log 2>&1 & echo $! > MOT-Feeder_mot2.pid  
 sleep 5
-screen -A -m -d -L -S feederMot3 ./runMyOpenTraderFeeder.sh mot3
-sleep 5
-#DISABLED TO FREE RESOURCES
-# screen -A -m -d -L -S feederFX ./runMyOpenTraderFeeder.sh FX 
+nohup ./runMyOpenTraderFeeder.sh -e mot1 > ../logs/MOT-Feeder_mot3.log 2>&1 & echo $! > MOT-Feeder_mot3.pid  
