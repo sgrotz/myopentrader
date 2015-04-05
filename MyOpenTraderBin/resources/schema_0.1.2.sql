@@ -1,5 +1,5 @@
--- MySQL dump 10.13  Distrib 5.6.16, for Win32 (x86)Warning: Using a password on the command line interface can be insecure.
-
+Warning: Using a password on the command line interface can be insecure.
+-- MySQL dump 10.13  Distrib 5.6.16, for Win32 (x86)
 --
 -- Host: localhost    Database: mot
 -- ------------------------------------------------------
@@ -197,6 +197,7 @@ CREATE TABLE `strategies` (
   `AMOUNT` varchar(20) COLLATE utf16_bin NOT NULL,
   `SIMULATED` tinyint(1) NOT NULL,
   `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `C2ID` varchar(30) COLLATE utf16_bin DEFAULT NULL,
   PRIMARY KEY (`NAME`),
   UNIQUE KEY `ID` (`ID`),
   KEY `SYMBOL` (`SYMBOL`,`ENABLED`)
@@ -339,4 +340,4 @@ CREATE TABLE `watchlist` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-30 14:18:24
+-- Dump completed on 2015-04-05 13:43:12

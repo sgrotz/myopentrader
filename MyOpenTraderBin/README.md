@@ -39,6 +39,7 @@ The easiest way to get started is:
 * start the embedded broker through bin/runEmbeddedMessageBus.sh|.bat
 * start the tick generator/simulator through bin/runTickGenerator.sh|.bat
 * start the MyOpenTraderCore Engine through bin/startMyOpenTraderCore_daemon.bat|.sh
+* Take a look at the [development guide] (https://wiki.myopentrader.org/confluence/display/MOTD/Development+Guide) 
 
 Happy trading :)
 
@@ -46,6 +47,7 @@ Take a look at the wiki for more detailed information (https://wiki.myopentrader
 
 
 CHANGELOG: 
+* Apr 4:  Added new Collective2.com Connector. Orders/Strategies can now get tagged with Collective2 systems. Allows external strategy monitoring.
 * Mar 30: Released v0.1.2. Added embedded webserver for MyOpenTraderWeb frontend. Embedded SHIRO for authentication and cleaned up css-mess in the frontend.
 * Feb 01: Released v0.1-alpha
 
