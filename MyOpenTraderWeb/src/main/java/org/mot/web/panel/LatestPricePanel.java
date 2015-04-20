@@ -1,5 +1,6 @@
 package org.mot.web.panel;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,16 +25,17 @@ public class LatestPricePanel extends Panel {
 
 		WatchList[] watchList = wld.getWatchlistAsObject();
 		Tick[] linkList = new Tick[watchList.length];
-
+		ArrayList<Tick> lList = new ArrayList<Tick>();
+		
 		for (int i = 0; i < watchList.length; i++) {
-			linkList[i] = tp.getLastPriceForSymbolAsObject(
-					watchList[i].getSymbol(), "LAST");
+			Tick t = tp.getLastPriceForSymbolAsObject(watchList[i].getSymbol(), "LAST");
+			if (t.getSymbol() != null) {
+				lList.add(t);
+			}
 		}
 
-		// Convert List to an array
-		final List list = Arrays.asList(linkList);
 
-		add(new ListView<Tick>("tickList", list) {
+		add(new ListView<Tick>("tickList", lList) {
 
 			@Override
 			protected void populateItem(ListItem item) {

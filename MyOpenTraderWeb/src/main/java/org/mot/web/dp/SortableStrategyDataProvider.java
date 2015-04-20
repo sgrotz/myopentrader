@@ -3,7 +3,6 @@ package org.mot.web.dp;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -15,21 +14,17 @@ import org.apache.wicket.model.PropertyModel;
 import org.mot.common.db.StrategyDAO;
 import org.mot.common.objects.Strategy;
 
-public class SortableStrategyDataProvider extends
-		SortableDataProvider<Object, Object> {
+public class SortableStrategyDataProvider extends SortableDataProvider<Object, Object> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5531187340179821367L;
 
-	class SortableDataProviderComparator implements Comparator<Strategy>,
-			Serializable {
+	class SortableDataProviderComparator implements Comparator<Strategy>,Serializable {
 		public int compare(final Strategy o1, final Strategy o2) {
-			PropertyModel<Comparable> model1 = new PropertyModel<Comparable>(
-					o1, o1.getID());
-			PropertyModel<Comparable> model2 = new PropertyModel<Comparable>(
-					o2, o2.getID());
+			PropertyModel<Comparable> model1 = new PropertyModel<Comparable>(o1, o1.getID());
+			PropertyModel<Comparable> model2 = new PropertyModel<Comparable>(o2, o2.getID());
 
 			int result = model1.getObject().compareTo(model2.getObject());
 
@@ -62,7 +57,8 @@ public class SortableStrategyDataProvider extends
 		// true));
 
 	}
-
+	
+	
 	@Override
 	public Iterator<?> iterator(long first, long count) {
 		// Get the data

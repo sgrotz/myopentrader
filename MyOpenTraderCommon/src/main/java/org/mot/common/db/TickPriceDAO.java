@@ -259,8 +259,9 @@ public class TickPriceDAO implements Serializable {
 
 		try {
 			s = connection.createStatement ();
-			logger.debug("SELECT * FROM `tickprices` where STOCK = '" + stock + "' and FIELD = '" + field + "' order by TIMESTAMP desc limit 1");
-			ResultSet rs = s.executeQuery("SELECT * FROM `tickprices` where STOCK = '" + stock + "' and FIELD = '" + field + "' order by TIMESTAMP desc limit 1");
+			String query = "SELECT * FROM `tickprices` where STOCK = '" + stock + "' and FIELD = '" + field + "' order by TIMESTAMP desc limit 1";
+			logger.debug(query);
+			ResultSet rs = s.executeQuery(query);
 
 			while(rs.next()) {
 				result.setSymbol(rs.getString("STOCK"));

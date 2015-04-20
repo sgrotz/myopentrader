@@ -5,6 +5,7 @@
 .project
 .metadata
 tmp/
+logs/
 *.tmp
 *.bak
 *.swp

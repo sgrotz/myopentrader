@@ -3,8 +3,6 @@ package org.mot.web.panel;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
@@ -122,8 +120,7 @@ public class MenuPanel extends Panel {
 			@Override
 			protected void populateItem(ListItem item) {
 				// TODO Auto-generated method stub
-				BookMarkableLink link = (BookMarkableLink) item
-						.getModelObject();
+				BookMarkableLink link = (BookMarkableLink) item.getModelObject();
 
 				// item.add(new Label("LinkName", link.getStock()));
 				item.add((BookMarkableLink) etfList.get(item.getIndex()));

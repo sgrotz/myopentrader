@@ -61,6 +61,7 @@ public class BookMarkableLink extends BookmarkablePageLink<Object> {
 
 	}
 
+	
 	public BookMarkableLink(String id, Class pageClass, String PageTitle) {
 		super(id, pageClass);
 		// TODO Auto-generated constructor stub
@@ -71,11 +72,10 @@ public class BookMarkableLink extends BookmarkablePageLink<Object> {
 		params.add("pageTitle", PageTitle);
 
 		super.parameters = params;
-
 	}
+	
 
-	public BookMarkableLink(String id, Class pageClass, String PageTitle,
-			String symbol) {
+	public BookMarkableLink(String id, Class pageClass, String PageTitle, String symbol) {
 		super(id, pageClass);
 		// TODO Auto-generated constructor stub
 
@@ -86,7 +86,24 @@ public class BookMarkableLink extends BookmarkablePageLink<Object> {
 		params.add("symbol", symbol);
 
 		super.parameters = params;
-
 	}
 
+	
+	public BookMarkableLink(String id, Class pageClass, String PageTitle, String symbol, String strategy, String LinkName, String LinkLabel) {
+		super(id, pageClass);
+		// TODO Auto-generated constructor stub
+
+		this.PageTitle = PageTitle;
+
+		PageParameters params = new PageParameters();
+		params.add("pageTitle", PageTitle);
+		params.add("symbol", symbol);
+		params.add("strategy", strategy);
+		
+		super.add(new Label(LinkName, LinkLabel));
+
+		super.parameters = params;
+	}
+	
+	
 }

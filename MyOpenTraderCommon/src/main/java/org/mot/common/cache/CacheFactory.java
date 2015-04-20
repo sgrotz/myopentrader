@@ -71,7 +71,12 @@ public class CacheFactory {
 		logger.debug("Getting element with key: " + key + " from Cache: " + cacheName);
 		Cache cache = manager.getCache(cacheName);
 		Element e = cache.get(key);
-		return e.getObjectValue();
+		
+		if (e != null) {
+			return e.getObjectValue();
+		} else {
+			return null;
+		}
 		
 	}
 	

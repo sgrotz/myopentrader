@@ -441,7 +441,7 @@ public class OrderDAO {
 		try {
 			s = connection.createStatement ();
 			
-				String query = "SELECT STRATEGY FROM orders where STATUS like '%CLOSED%' and STRATEGY ='" + symbol + "' group by STRATEGY order by TIMESTAMP desc";
+				String query = "SELECT STRATEGY FROM orders where STATUS like '%CLOSED%' and STRATEGY like '" + symbol + "%' group by STRATEGY order by TIMESTAMP desc";
 			
 	    		logger.debug(query);
 		    	ResultSet rs = s.executeQuery(query);
@@ -509,6 +509,46 @@ public class OrderDAO {
 	 * @return - an array of orders
 	 */
 	public Order[] getAllOrdersByStrategy(String symbol, String strategy) {
+		
+		ArrayList<Order> list = new ArrayList<Order>();
+		Statement s;
+		Connection connection = dcf.getConnection();
+		
+		try {
+			s = connection.createStatement ();
+			
+	    		logger.debug("SELECT * FROM orders where SYMBOL ='" + symbol + "' and STRATEGY='"+ strategy + "'");
+
+		    	ResultSet rs = s.executeQuery("SELECT * FROM orders where SYMBOL ='" + symbol + "' and STRATEGY='"+ strategy + "'");
+
+		    	while (rs.next()) {
+		    		Order order = mapResultSetToOrder(rs);
+
+		    		list.add(order);
+		    	}
+
+		    	s.close();
+		    	dcf.disconnect(connection);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dcf.disconnect(connection);
+		}
+
+		Order[] orders = new Order[list.size()];
+
+		return list.toArray(orders); 
+	}
+	
+	/**
+	 * @param symbol - Symbol to look for orders
+	 * @param strategy - which strategy to use
+	 * @param buySell - buy sell indicator (can be BUY or SELL)
+	 * @return - an array of orders
+	 */
+	public Order[] getAllOrdersByStrategyAndBuySell(String symbol, String strategy, String buySell) {
 		
 		ArrayList<Order> list = new ArrayList<Order>();
 		Statement s;

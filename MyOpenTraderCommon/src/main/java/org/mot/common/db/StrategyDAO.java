@@ -123,7 +123,36 @@ public class StrategyDAO implements Serializable {
 		return list.toArray(ret);
 	}
 
+	
+	public Strategy getStrategyByName(String name) {
 
+		Connection connection = dcf.getConnection();
+
+		Strategy entry = null;
+		Statement s;
+		
+		try {
+			s = connection.createStatement ();
+			String query = "SELECT * FROM `strategies` where NAME = '" + name + "' limit 1"; 
+			logger.debug(query);
+			ResultSet rs = s.executeQuery(query);
+
+			while(rs.next()) {
+				entry = mapStrategyToEntry(rs);
+			}
+			s.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// Make sure the connection always gets closed!
+			dcf.disconnect(connection);
+		}	
+
+		// convert to an array
+		return entry;
+	}
 	
 
 

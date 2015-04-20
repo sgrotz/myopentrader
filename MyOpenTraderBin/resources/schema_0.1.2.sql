@@ -17,30 +17,6 @@ Warning: Using a password on the command line interface can be insecure.
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `avgcalc`
---
-
-DROP TABLE IF EXISTS `avgcalc`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `avgcalc` (
-  `STOCK` varchar(50) COLLATE utf16_bin NOT NULL,
-  `VALUE1` int(11) NOT NULL,
-  `VALUE2` int(11) NOT NULL,
-  `TIMERANGE` varchar(20) COLLATE utf16_bin NOT NULL,
-  `QUANTITY` int(11) DEFAULT NULL,
-  `TRADECOUNT` int(11) DEFAULT NULL,
-  `RESULT` double NOT NULL,
-  `TXNCOST` double DEFAULT NULL,
-  `PNL` double DEFAULT NULL,
-  `CLASSNAME` varchar(100) COLLATE utf16_bin NOT NULL,
-  `TIMESTAMP` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `STARTTIME` varchar(25) COLLATE utf16_bin DEFAULT NULL,
-  `ENDTIME` varchar(25) COLLATE utf16_bin DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf16 COLLATE=utf16_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `configuration`
 --
 
@@ -340,4 +316,4 @@ CREATE TABLE `watchlist` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-05 13:43:12
+-- Dump completed on 2015-04-20  9:56:29

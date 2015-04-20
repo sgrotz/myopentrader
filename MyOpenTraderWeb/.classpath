@@ -59,17 +59,17 @@
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-expression/3.0.7.RELEASE/spring-expression-3.0.7.RELEASE.jar" sourcepath="M2_REPO/org/springframework/spring-expression/3.0.7.RELEASE/spring-expression-3.0.7.RELEASE-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-net/commons-net/3.1/commons-net-3.1.jar" sourcepath="M2_REPO/commons-net/commons-net/3.1/commons-net-3.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/jasypt/jasypt/1.9.0/jasypt-1.9.0.jar" sourcepath="M2_REPO/org/jasypt/jasypt/1.9.0/jasypt-1.9.0-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-broker/1.7/apollo-broker-1.7.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-broker/1.7/apollo-broker-1.7-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-dto/1.7/apollo-dto-1.7.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-dto/1.7/apollo-dto-1.7-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-util/1.7/apollo-util-1.7.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-util/1.7/apollo-util-1.7-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-broker/1.7.1/apollo-broker-1.7.1.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-broker/1.7.1/apollo-broker-1.7.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-dto/1.7.1/apollo-dto-1.7.1.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-dto/1.7.1/apollo-dto-1.7.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-util/1.7.1/apollo-util-1.7.1.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-util/1.7.1/apollo-util-1.7.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-library/2.10.0/scala-library-2.10.0.jar" sourcepath="M2_REPO/org/scala-lang/scala-library/2.10.0/scala-library-2.10.0-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-selector/1.7/apollo-selector-1.7.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-selector/1.7/apollo-selector-1.7-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-selector/1.7.1/apollo-selector-1.7.1.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-selector/1.7.1/apollo-selector-1.7.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/fusesource/hawtdispatch/hawtdispatch-scala/1.20/hawtdispatch-scala-1.20.jar" sourcepath="M2_REPO/org/fusesource/hawtdispatch/hawtdispatch-scala/1.20/hawtdispatch-scala-1.20-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/apache/activemq/activemq-jaas/5.7.0/activemq-jaas-5.7.0.jar" sourcepath="M2_REPO/org/apache/activemq/activemq-jaas/5.7.0/activemq-jaas-5.7.0-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/fusesource/hawtbuf/hawtbuf-proto/1.10/hawtbuf-proto-1.10.jar" sourcepath="M2_REPO/org/fusesource/hawtbuf/hawtbuf-proto/1.10/hawtbuf-proto-1.10-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/yaml/snakeyaml/1.7/snakeyaml-1.7.jar" sourcepath="M2_REPO/org/yaml/snakeyaml/1.7/snakeyaml-1.7-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-stomp/1.7/apollo-stomp-1.7.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-stomp/1.7/apollo-stomp-1.7-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-leveldb/1.7/apollo-leveldb-1.7.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-leveldb/1.7/apollo-leveldb-1.7-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-stomp/1.7.1/apollo-stomp-1.7.1.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-stomp/1.7.1/apollo-stomp-1.7.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-leveldb/1.7.1/apollo-leveldb-1.7.1.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-leveldb/1.7.1/apollo-leveldb-1.7.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/iq80/leveldb/leveldb-api/0.6/leveldb-api-0.6.jar" sourcepath="M2_REPO/org/iq80/leveldb/leveldb-api/0.6/leveldb-api-0.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/iq80/leveldb/leveldb/0.6/leveldb-0.6.jar" sourcepath="M2_REPO/org/iq80/leveldb/leveldb/0.6/leveldb-0.6-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/12.0/guava-12.0.jar" sourcepath="M2_REPO/com/google/guava/guava/12.0/guava-12.0-sources.jar"/>
@@ -81,7 +81,7 @@
   <classpathentry kind="var" path="M2_REPO/org/fusesource/leveldbjni/leveldbjni-linux64/1.8/leveldbjni-linux64-1.8.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/fusesource/leveldbjni/leveldbjni-win32/1.8/leveldbjni-win32-1.8.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/fusesource/leveldbjni/leveldbjni-win64/1.8/leveldbjni-win64-1.8.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-web/1.7/apollo-web-1.7.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-web/1.7/apollo-web-1.7-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-web/1.7.1/apollo-web-1.7.1.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-web/1.7.1/apollo-web-1.7.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/fusesource/scalate/scalate-core_2.10/1.6.1/scalate-core_2.10-1.6.1.jar" sourcepath="M2_REPO/org/fusesource/scalate/scalate-core_2.10/1.6.1/scalate-core_2.10-1.6.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/fusesource/scalate/scalate-util_2.10/1.6.1/scalate-util_2.10-1.6.1.jar" sourcepath="M2_REPO/org/fusesource/scalate/scalate-util_2.10/1.6.1/scalate-util_2.10-1.6.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/scala-lang/scala-compiler/2.10.0/scala-compiler-2.10.0.jar" sourcepath="M2_REPO/org/scala-lang/scala-compiler/2.10.0/scala-compiler-2.10.0-sources.jar"/>
@@ -98,7 +98,7 @@
   <classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-client/1.13/jersey-client-1.13.jar" sourcepath="M2_REPO/com/sun/jersey/jersey-client/1.13/jersey-client-1.13-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/josql/josql/1.5/josql-1.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/josql/gentlyweb-utils/1.5/gentlyweb-utils-1.5.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-openwire/1.7/apollo-openwire-1.7.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-openwire/1.7/apollo-openwire-1.7-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/activemq/apollo-openwire/1.7.1/apollo-openwire-1.7.1.jar" sourcepath="M2_REPO/org/apache/activemq/apollo-openwire/1.7.1/apollo-openwire-1.7.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1.jar" sourcepath="M2_REPO/org/quartz-scheduler/quartz/2.2.1/quartz-2.2.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1.jar" sourcepath="M2_REPO/c3p0/c3p0/0.9.1.1/c3p0-0.9.1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/espertech/esper/5.1.0/esper-5.1.0.jar" sourcepath="M2_REPO/com/espertech/esper/5.1.0/esper-5.1.0-sources.jar"/>

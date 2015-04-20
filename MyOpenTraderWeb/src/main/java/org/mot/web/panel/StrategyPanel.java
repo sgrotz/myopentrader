@@ -37,8 +37,7 @@ public class StrategyPanel extends Panel {
 		super(id);
 
 		try {
-			config = new PropertiesConfiguration(pathToConfigDir
-					+ "/config.properties");
+			config = new PropertiesConfiguration(pathToConfigDir + "/config.properties");
 
 			StrategyAnalyser sa = new StrategyAnalyser();
 
@@ -51,14 +50,12 @@ public class StrategyPanel extends Panel {
 					StrategyAnalysis sa = (StrategyAnalysis) item
 							.getModelObject();
 
-					Double txCost = cf
-							.round((sa.getQuantity()
+					Double txCost = cf.round((sa.getQuantity()
 									* sa.getPrice()
 									* config.getDouble("order.transactionCostPerOrder.pct") * sa
 									.getTradeCount()), 2);
 					Double pnl = cf.round(sa.getPnL() - txCost, 2);
-					Double ept = cf.round((sa.getPnL() - sa.getTradeCount())
-							/ sa.getTradeCount(), 2);
+					Double ept = cf.round((sa.getPnL() - sa.getTradeCount()) / sa.getTradeCount(), 2);
 					Double eps = cf.round(sa.getPnL() / sa.getQuantity(), 2);
 
 					item.add(new Label("Strategy", "Strategy: " + sa.getName()
@@ -101,8 +98,7 @@ public class StrategyPanel extends Panel {
 					StrategyAnalysis sa = (StrategyAnalysis) item
 							.getModelObject();
 
-					Double txCost = cf
-							.round((sa.getQuantity()
+					Double txCost = cf.round((sa.getQuantity()
 									* sa.getPrice()
 									* config.getDouble("order.transactionCostPerOrder.pct") * sa
 									.getTradeCount()), 2);

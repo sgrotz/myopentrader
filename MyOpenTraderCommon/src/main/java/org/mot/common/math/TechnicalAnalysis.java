@@ -169,6 +169,7 @@ public class TechnicalAnalysis {
 	}
 	
 	
+	@Cacheable (name="TechnicalAnalysis_getSeriesByDays", ttl=600)
 	public TimeSeries getSeriesByDays(String symbol, String startDate, int days, boolean enforce) {
 		
 		String today = db.getTimestampFromDate(startDate, pattern).toString();
