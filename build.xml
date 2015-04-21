@@ -9,7 +9,7 @@
     <!-- WINDOWS BUILD PROPERTIES -->
     <property name="root.Dir" location="${basedir}"/>
     <property name="buildDir" location="${root.Dir}/MyOpenTraderBin"/>
-    <property name="sharedDir" location="X:/Google Drive/Development/MyOpenTrader"/>
+    <property name="sharedDir" location="Z:/mot"/>
     
     <property name="version" value="0.1.2"/>
 
@@ -57,7 +57,10 @@
 	   <include name="*.war"/>
  	 </fileset>
 	</copy>
+	
+    </target>
 
+    <target name="backup">
 	<!-- <antcall target="download-usage-guide"/>  -->
 	<antcall target="dump-database"/> 
 	<antcall target="zipSource"/>  
@@ -68,8 +71,6 @@
 	 <fileset file="${root.Dir}/MyOpenTrader-${version}-bin.zip"/>
 	 <fileset file="${root.Dir}/MyOpenTrader-${version}-src.zip"/>
   	</copy>	
-	
-	
     </target>
     
     <target name="dump-database">  
@@ -111,6 +112,7 @@
     	<delete file="${root.Dir}/MyOpenTrader-${version}-src.zip"/>
     	<delete file="${buildDir}/resources/MyOpenTraderWeb.war"/>
     	<delete dir="${root.Dir}/data"/>
+    	<delete dir="${root.Dir}/logs"/>
     	<delete file="${buildDir}/version"/>
         <delete dir="${buildDir}/libs"/>
         <delete dir="${buildDir}/data"/>
@@ -122,6 +124,7 @@
     <target name="init">
     	<mkdir dir="${buildDir}/javadoc"/>
         <mkdir dir="${buildDir}/libs"/>
+        <mkdir dir="${buildDir}/logs"/>
     </target>
         
 </project>
