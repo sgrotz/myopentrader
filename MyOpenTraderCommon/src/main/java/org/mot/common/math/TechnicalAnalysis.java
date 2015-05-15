@@ -184,7 +184,9 @@ public class TechnicalAnalysis {
 			String sd = db.subtractDaysFromDate(today, pattern, days + iteration);
 			
 			series = this.getSeriesByDate(symbol, sd, today);
-			seriesSize =  series.getTickCount();
+			if (series != null) {
+				seriesSize =  series.getTickCount();
+			}
 			
 			// Increase the iteration by the difference between days and current seriesSize
 			iteration = iteration + (days - seriesSize);
@@ -210,15 +212,17 @@ public class TechnicalAnalysis {
 		
 		long start = System.currentTimeMillis();
 		Double ret = 0.0;
+		int tickCount = 0;
 		
 		logger.debug("Running stochastic oscillator calculation for " + symbol + " the last " + days + " days!");
 		
 		// Create the time series
 		TimeSeries series = this.getSeriesByDays(symbol, startDate, days, true);
 		
-		// Get the tick count or size of the series
-		int tickCount = series.getTickCount();
-		
+		if (series != null) {
+			// Get the tick count or size of the series
+			tickCount = series.getTickCount();
+		}
 		if (tickCount > 0) {
 			// Create a new stochasic oscillator indicator
 			StochasticOscillatorKIndicator soki = new StochasticOscillatorKIndicator(series, tickCount);

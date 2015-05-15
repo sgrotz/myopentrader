@@ -17,13 +17,13 @@ sleep 5
 echo "*** Starting MyOpenTraderCore - mot2 ***"
 echo "*** Starting MyOpenTraderCore - mot2 ***" >> ../logs/MOT-Core_mot2.log
 date >> ../logs/MOT-Core_mot2.log
-nohup ./runMyOpenTraderCore.sh -e mot2 >> ../logs/MOT-Core_mot2 2>&1 & echo $! > MOT-Core_mot2.pid  
+nohup ./runMyOpenTraderCore.sh -e mot2 >> ../logs/MOT-Core_mot2.log 2>&1 & echo $! > MOT-Core_mot2.pid  
 sleep 5
 
 echo "*** Starting MyOpenTraderCore - mot3 ***"
-echo "*** Starting MyOpenTraderCore - mot3 ***" >> ../logs/MOT-Core_OTHERS.log
-date >> ../logs/MOT-Core_OTHERS.log
-nohup ./runMyOpenTraderCore.sh -e mot3 >> ../logs/MOT-Core_mot3 2>&1 & echo $! > MOT-Core_mot3.pid  
+echo "*** Starting MyOpenTraderCore - mot3 ***" >> ../logs/MOT-Core_mot3.log
+date >> ../logs/MOT-Core_mot3.log
+nohup ./runMyOpenTraderCore.sh -e mot3 >> ../logs/MOT-Core_mot3.log 2>&1 & echo $! > MOT-Core_mot3.pid  
 sleep 5
 
 echo "*** Starting MyOpenTraderCore - scheduler ***"

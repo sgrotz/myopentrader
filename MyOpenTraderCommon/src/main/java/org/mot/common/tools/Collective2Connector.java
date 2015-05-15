@@ -54,6 +54,8 @@ public class Collective2Connector {
 			baseUrl = props.getString("collective2connector.baseURL","http://www.collective2.com/cgi-perl/signal.mpl?cmd=signal");
 			pwd = props.getString("collective2connector.password");
 			
+			enabled = props.getBoolean("collective2connector.enabled");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,6 +67,7 @@ public class Collective2Connector {
 			// Make sure to lookup the system id, which belongs to a particular strategy.
 			String systemID = sd.getStrategyC2IDByStrategy(order.getStrategy());
 			
+			// Only run if there is a system ID available.
 			if (systemID != null) {
 				// instrument should always be stock (we dont support anything else yet)
 				String instrument = "stock";
@@ -84,7 +87,7 @@ public class Collective2Connector {
 				// Always set to good til cancel
 				String duration = "GTC";
 				
-				this.sendSignal(systemID, duration, action, quantity, instrument, symbol, duration);
+				this.sendSignal(systemID, this.pwd, action, quantity, instrument, symbol, duration);
 			}
 		
 		}
