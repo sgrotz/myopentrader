@@ -27,13 +27,15 @@ public class Collective2Connector {
 		
 		Collective2Connector c2 = new Collective2Connector();
 		
-		c2.sendSignal("93669283", c2.pwd, "BTO", 10, "STOCK", "AAPL", "GTC");
+		//c2.sendSignal(123, "93669283", c2.pwd, "BTO", 10, "STOCK", "AAPL", "GTC");
+		
+		c2.sendSignal(123, "93669283", c2.pwd, "STC", 10, "STOCK", "AAPL", "GTC");
 		
 		
 	}
 	
 	
-	private String baseUrl = "http://www.collective2.com/cgi-perl/signal.mpl?cmd=signal";
+	private String baseUrl = "http://www.collective2.com/cgi-perl/signal.mpl?";
 	private String pwd;
 	Logger logger = LoggerFactory.getLogger(getClass());
 	private PropertiesFactory pf = PropertiesFactory.getInstance();
@@ -51,7 +53,7 @@ public class Collective2Connector {
 			Configuration props = new PropertiesConfiguration(confDir + "/collective2.properties");
 	
 			// Overwrite with configuration file settings
-			baseUrl = props.getString("collective2connector.baseURL","http://www.collective2.com/cgi-perl/signal.mpl?cmd=signal");
+			baseUrl = props.getString("collective2connector.baseURL","http://www.collective2.com/cgi-perl/signal.mpl?");
 			pwd = props.getString("collective2connector.password");
 			
 			enabled = props.getBoolean("collective2connector.enabled");
@@ -72,12 +74,18 @@ public class Collective2Connector {
 				// instrument should always be stock (we dont support anything else yet)
 				String instrument = "stock";
 				
+				// As default use the order ID as signalID
+				int ID = Integer.valueOf(order.getID());
+				
 				// There are only BTO (Buy-To-Open) and STC (Sell to Close) - ignore the others for now
 				String action;
 				if (order.getBUYSELL().equals("BUY")) {
 					action = "BTO";
 				} else {
 					action = "STC";
+					
+					// If it is a sell order, make sure that the ID reflects the previous buy order. 
+					ID = Integer.valueOf(order.getClosed());
 				}
 				 
 				// Set the quantity and symbol from the order
@@ -87,7 +95,7 @@ public class Collective2Connector {
 				// Always set to good til cancel
 				String duration = "GTC";
 				
-				this.sendSignal(systemID, this.pwd, action, quantity, instrument, symbol, duration);
+				this.sendSignal(ID, systemID, this.pwd, action, quantity, instrument, symbol, duration);
 			}
 		
 		}
@@ -95,17 +103,18 @@ public class Collective2Connector {
 	
 	
 	
-	private String sendSignal(String systemID, String pwd, String action, int quantity, String instrument, String symbol, String duration) {
+	private String sendSignal(int ID, String systemID, String pwd, String action, int quantity, String instrument, String symbol, String duration) {
 
 		String response = null;
 		String url = baseUrl + 
-				"&systemid=" + systemID +
+				"systemid=" + systemID +
 				"&pw=" + pwd +
 				"&instrument=" + instrument + 
 				"&action=" + action +
 				"&quant=" + quantity +
 				"&symbol=" + symbol + 
-				"&duration=" + duration; 
+				"&duration=" + duration +
+				"&signalid=" + ID; 
 		
 		logger.debug("Sending signal: " + url);
 		
