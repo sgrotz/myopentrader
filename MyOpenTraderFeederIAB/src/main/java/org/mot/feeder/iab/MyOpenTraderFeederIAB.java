@@ -152,13 +152,14 @@ public class MyOpenTraderFeederIAB extends HttpServlet {
 				
 			} else {
 				logger.error("Can not connect to local ECClient - check your configuration ... will exit");
+				System.exit(0);
 			}
 
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			logger.error(e.getLocalizedMessage());
-			System.out.println(e.getLocalizedMessage());
+			e.printStackTrace();
 		} 
 	}
 	

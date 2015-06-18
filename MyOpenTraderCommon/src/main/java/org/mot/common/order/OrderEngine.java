@@ -28,9 +28,11 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.mot.common.db.ExchangeDAO;
 import org.mot.common.db.OrderDAO;
+import org.mot.common.db.StrategyDAO;
 import org.mot.common.db.WatchListDAO;
 import org.mot.common.mq.ActiveMQFactory;
 import org.mot.common.objects.Order;
+import org.mot.common.objects.Strategy.Status;
 import org.mot.common.tools.Collective2Connector;
 import org.mot.common.tools.PropertiesFactory;
 import org.slf4j.Logger;
@@ -45,12 +47,18 @@ public class OrderEngine {
 	private ExchangeDAO ed = new ExchangeDAO();
 	private OrderDAO od = new OrderDAO();
 	private Collective2Connector cc = new Collective2Connector();
+	private StrategyDAO sd = new StrategyDAO();
 	
 	static Configuration config;
 	static Double txnPct;
 	static int min;
 	static int max;
 	
+	
+	
+	/**
+	 * Default constructor 
+	 */
 	private OrderEngine() {
 		PropertiesFactory pf = PropertiesFactory.getInstance();
 		String pathToConfigDir = pf.getConfigDir();
@@ -68,6 +76,11 @@ public class OrderEngine {
 	
 	private static OrderEngine instance = null; 
 	
+	
+	/**
+	 * Use this method to get the current order engine instance (should always be a singleton!)
+	 * @return OrderEngine instance
+	 */
 	public static OrderEngine getInstance() {
 		if (instance == null) {
 			return new OrderEngine();
@@ -115,6 +128,46 @@ public class OrderEngine {
 			//order.setSimulated(true); 
 			//order.setQuantity(1);
 			
+			
+			/*
+			 * This section will handle the closing of strategies
+			 * In here we will check for the remaining open positions, and depending on being short or long, only allow the opposite side trades.
+			 * This only applies, if you have marked a strategy as "CLOSING" in the DB
+			 */
+			if (order.status.equals(Status.CLOSING)) {
+				String strategy = order.getStrategy();
+				int openOrderQuantity = od.getOpenOrderQuantity(strategy);
+				
+				if (openOrderQuantity == 0) {
+					// We have closed all of the remaining positions, we can mark the strategy as DISABLED now
+					sd.updateStrategyStatus(order.getStrategy(), Status.DISABLED);			
+					
+					// Exit from the method and return false
+					return false;
+					
+				} else if (openOrderQuantity > 0) {
+					// This implies we are long on a position, so we should only allow sell trades
+					if (order.getBUYSELL().equals("BUY")) {
+						
+						// Do not execute the trade but exit with false;
+						return false;
+					}
+				} else {
+					// This can only happen if we are short on a position (<0)
+					// Only allow to buy trades 
+					if (order.getBUYSELL().equals("SELL")) {
+						
+						// Do not execute the trade but exit with false;
+						return false;
+					}	
+				}
+			}
+			
+			
+			
+			/*
+			 * The following section will manage the writing to the internal database
+			 */
 			if (writeToDB) {
 				// Writing the order to the database
 				logger.debug("Adding order " + order.getID() + " to database ...");
@@ -126,7 +179,11 @@ public class OrderEngine {
 				}
 			}
 		
-			// Only execute if this is not a simulation
+			
+			/* 
+			 * Only execute this section, if this is not a simulated order.
+			 * Publish to broker for further processing
+			 */
 			if (!order.isSimulated()) { 
 				MessageProducer mp = amf.createMessageProducer("orderChannel", 0, true);
 				// Then placing the order on the exchange

@@ -31,6 +31,7 @@ import java.util.ArrayList;
 
 import org.mot.common.conversion.TickConverter;
 import org.mot.common.objects.Strategy;
+import org.mot.common.objects.Strategy.Status;
 import org.mot.common.objects.StrategyAnalysis;
 import org.mot.common.util.DateBuilder;
 import org.mot.common.util.IDGenerator;
@@ -134,7 +135,7 @@ public class StrategyAnalysisDAO implements Serializable {
 
 			while(rs.next()) {
 				Strategy entry = new Strategy();
-				entry.setEnabled(true);
+				entry.setStatus(Status.ENABLED);
 				entry.setID(rs.getString("ID"));
 				entry.setLoadValues(rs.getString("LOADVALUES"));
 				entry.setName(rs.getString("NAME"));
@@ -181,7 +182,7 @@ public class StrategyAnalysisDAO implements Serializable {
 
 			while(rs.next()) {
 				Strategy entry = new Strategy();
-				entry.setEnabled(true);
+				entry.setStatus(Status.ENABLED);
 				entry.setID(rs.getString("ID"));
 				entry.setLoadValues(rs.getString("LOADVALUES"));
 				entry.setName(rs.getString("NAME"));

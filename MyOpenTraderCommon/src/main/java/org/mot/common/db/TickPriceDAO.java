@@ -464,6 +464,47 @@ public class TickPriceDAO implements Serializable {
 	}
 	
 	
+	public Tick[] getTicksForSymbolBetweenTimestamps(String symbol, String field, Timestamp startTime, Timestamp endTime, int modulo) {
+
+		Connection connection = dcf.getConnection();
+ 
+		ArrayList<Tick> list = new ArrayList<Tick>();
+		Statement s;
+
+		try {
+			s = connection.createStatement ();
+			String query = "SELECT * FROM `tickprices` where STOCK = '" + symbol + "' and FIELD = '" + field + "' and TIMESTAMP BETWEEN '" + startTime + "' and '" + endTime + "' order by TIMESTAMP asc";
+			logger.debug(query);
+			ResultSet rs = s.executeQuery(query);
+
+			int ID = new WatchListDAO().getIDForStock(symbol);
+			
+			int u = 0;
+			while(rs.next()) {
+				if (u % modulo == 0) {
+					Tick entry = mapResultToTick(rs, ID);
+
+					list.add(entry);
+				}
+				u++;
+			}
+
+			s.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// Make sure the connection always gets closed!
+			dcf.disconnect(connection);
+		}	
+
+		Tick[] ret = new Tick[list.size()];
+
+		return list.toArray(ret);
+	}
+	
+	
 	
 	/**
 	 * Get all of todays ticks. 

@@ -59,8 +59,7 @@ public class StockPage extends WebPage {
 			// Dynamic Content
 			add(new TodaysTickChart("todaysTicks", symbol,
 					config.getInt("chart.todays.refreshMsec")));
-			// add(new ScatterTickChart("scatterTicks", symbol,
-			// config.getInt("chart.todays.refreshMsec")));
+
 			add(new TickRangeChart("scatterTicks", symbol,
 					config.getInt("chart.todays.refreshMsec")));
 			add(new RealTimeTickChart("realTimeChart", symbol,

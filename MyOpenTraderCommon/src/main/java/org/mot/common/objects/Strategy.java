@@ -25,6 +25,11 @@ import java.io.Serializable;
 
 public class Strategy implements Serializable {
 	
+	public enum Status {
+		ENABLED, DISABLED, CLOSING
+	}
+	
+	
 	/**
 	 * 
 	 */
@@ -35,12 +40,21 @@ public class Strategy implements Serializable {
 	private String Type;
 	private String Symbol;
 	private String LoadValues;
-	private boolean enabled;
+	private Status Status;
 	private Double Amount; 
 	private boolean simulated; 
 	private Long timestamp;
 	private String c2id;
 
+	
+	
+	
+	public Status getStatus() {
+		return Status;
+	}
+	public void setStatus(Status status) {
+		Status = status;
+	}
 	
 	/**
 	 * @return the c2id
@@ -96,12 +110,6 @@ public class Strategy implements Serializable {
 	public void setLoadValues(String loadValues) {
 		LoadValues = loadValues;
 	}
-	public boolean isEnabled() {
-		return enabled;
-	}
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 	public Long getTimestamp() {
 		return timestamp;
 	}
@@ -110,26 +118,26 @@ public class Strategy implements Serializable {
 	}
 	
 	public Strategy(String iD, String name, String type, String symbol,
-			String loadValues, boolean enabled, Long timestamp) {
+			String loadValues, Status status, Long timestamp) {
 		super();
 		ID = iD;
 		Name = name;
 		Type = type;
 		Symbol = symbol;
 		LoadValues = loadValues;
-		this.enabled = enabled;
+		Status = status;
 		this.timestamp = timestamp;
 	}
 	
 	public Strategy(String iD, String name, String type, String symbol,
-			String loadValues, boolean enabled, Double amount, boolean simulated) {
+			String loadValues, Status status, Double amount, boolean simulated) {
 		super();
 		ID = iD;
 		Name = name;
 		Type = type;
 		Symbol = symbol;
 		LoadValues = loadValues;
-		this.enabled = enabled;
+		Status = status; 
 		this.simulated = simulated;
 		this.Amount = amount;
 	}

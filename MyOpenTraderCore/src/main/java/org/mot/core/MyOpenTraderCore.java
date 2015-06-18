@@ -338,42 +338,20 @@ public class MyOpenTraderCore extends HttpServlet {
 	 * @param symbol
 	 */
 	private void createOrdersForStrategies(Configuration genericProperties, String symbol) {
-		// Create new mvgavgs for all listed strategies
 		StrategyDAO sd = new StrategyDAO();
 		TickPriceDAO tpd = new TickPriceDAO();
-		OrderDAO o = new OrderDAO();
-		StrategyAnalyser sa = new StrategyAnalyser();
-		StrategyAnalysisDAO sad = new StrategyAnalysisDAO();
 		Strategy[] strategies = sd.getStrategiesForSymbolAsObject(symbol);
 	
 		try {
 	
 			for (int u = 0; u<strategies.length; u++ ){
 	
-				// Read out the dynamic properties for startup ...
-				
+				// Read out the dynamic properties for startup ...	
 				LoadValueConverter lvc = new LoadValueConverter();
 				LoadValue[] values = lvc.convertStringToValues(strategies[u].getLoadValues());
 	
-				/*
-				// Run the StrategyAnalyser & convert to array 
-				ArrayList<StrategyAnalysis> saList = sa.analyseBySymbol(strategies[u].getSymbol());
-				if (saList.size() != 0) {
-					StrategyAnalysis[] sarray = new StrategyAnalysis[saList.size()];
-					sarray = saList.toArray(sarray);
-	
-					// Write the past analysis results to the DB
-					sad.addNewStrategyAnalysis(sarray);
-	
-					if (genericProperties.getBoolean("engine.startup.deleteSimulatedOrders")) {
-						// Delete old simulated orders from the database - clean up
-						o.deleteOrdersByStrategy(strategies[u].getName(), true);
-					}
-				}
-				
-				*/
-	
 				// Default simulated flag to true - just to be save! 
+				// This is overwritten with the strategy value later on
 				boolean simulated = true;
 				
 				// Default the amount to 10 shares
@@ -428,7 +406,6 @@ public class MyOpenTraderCore extends HttpServlet {
 
 			System.out.println("Setting config path to: " + confDir);
 			System.out.println("Running as executor: " + executor);
-
 
 			new MyOpenTraderCore().startWorkers(confDir, executor);
 

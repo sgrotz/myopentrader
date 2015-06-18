@@ -89,6 +89,15 @@ public class BookMarkableLink extends BookmarkablePageLink<Object> {
 	}
 
 	
+	/**
+	 * @param id
+	 * @param pageClass
+	 * @param PageTitle
+	 * @param symbol
+	 * @param strategy
+	 * @param LinkName
+	 * @param LinkLabel
+	 */
 	public BookMarkableLink(String id, Class pageClass, String PageTitle, String symbol, String strategy, String LinkName, String LinkLabel) {
 		super(id, pageClass);
 		// TODO Auto-generated constructor stub

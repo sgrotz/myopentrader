@@ -47,13 +47,12 @@ public class StrategyDetailPage extends WebPage {
 			// Static content
 			// Add the footer - this should be on each page!
 			add(new FooterPanel("footer"));
-
 			add(new Label("pageTitle", String.valueOf(parameters.get("pageTitle"))));
 			add(new BookMarkableLink("HOME", HomePage.class, "MyOpenTraderHome"));
 			add(new MenuPanel("menu"));
 			add(new LatestPricePanel("pricePanel"));
-			add(new StrategyPanel("strategyPanel"));
-
+			
+			// Dynamic content
 			add(new StrategyDetailChart("strategyDetailChart", symbol, strategy));
 			
 			// Data Table

@@ -13,6 +13,9 @@ import org.mot.common.math.CalculatorFactory;
 import org.mot.common.objects.StrategyAnalysis;
 import org.mot.common.tools.PropertiesFactory;
 import org.mot.common.util.StrategyAnalyser;
+import org.mot.web.StrategyDetailPage;
+import org.mot.web.link.BookMarkableLink;
+import org.mot.web.objects.StrategyDetails;
 
 public class StrategyPanel extends Panel {
 
@@ -64,7 +67,8 @@ public class StrategyPanel extends Panel {
 							+ " - EarningsPerTrade: $" + ept + " - Shares: "
 							+ sa.getQuantity() + " - EarningsPerShare: $" + eps
 							+ ")"));
-
+					item.add(new BookMarkableLink("StrategyLink", StrategyDetailPage.class, "Details for " + sa.getName(), symbol, sa.getName(), "link", "Details"));
+					//(String id, Class pageClass, String PageTitle, String symbol, String strategy, String LinkName, String LinkLabel)
 				}
 			});
 		} catch (ConfigurationException e) {
