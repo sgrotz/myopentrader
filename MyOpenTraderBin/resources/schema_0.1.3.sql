@@ -1,5 +1,5 @@
-Warning: Using a password on the command line interface can be insecure.-- MySQL dump 10.13  Distrib 5.6.16, for Win32 (x86)
-
+Warning: Using a password on the command line interface can be insecure.
+-- MySQL dump 10.13  Distrib 5.6.16, for Win32 (x86)
 --
 -- Host: localhost    Database: mot
 -- ------------------------------------------------------
@@ -363,4 +363,4 @@ CREATE TABLE `watchlist` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-22  7:24:24
+-- Dump completed on 2015-08-11 11:24:14

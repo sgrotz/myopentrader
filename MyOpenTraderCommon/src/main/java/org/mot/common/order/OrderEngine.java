@@ -123,12 +123,7 @@ public class OrderEngine {
 		
 		// Only process if the exchange is open
 		if ( open || order.isSimulated()) {
-			
-			//This is a security valve ... always set the simulation flag to true...
-			//order.setSimulated(true); 
-			//order.setQuantity(1);
-			
-			
+							
 			/*
 			 * This section will handle the closing of strategies
 			 * In here we will check for the remaining open positions, and depending on being short or long, only allow the opposite side trades.
@@ -141,6 +136,8 @@ public class OrderEngine {
 				if (openOrderQuantity == 0) {
 					// We have closed all of the remaining positions, we can mark the strategy as DISABLED now
 					sd.updateStrategyStatus(order.getStrategy(), Status.DISABLED);			
+			
+					logger.warn("Disabling strategy " + strategy + " - No more open positions! ");
 					
 					// Exit from the method and return false
 					return false;
@@ -148,6 +145,8 @@ public class OrderEngine {
 				} else if (openOrderQuantity > 0) {
 					// This implies we are long on a position, so we should only allow sell trades
 					if (order.getBUYSELL().equals("BUY")) {
+						
+						logger.debug("Strategy " + strategy + " is marked as CLOSING - no more BUY trades are allowed ...");
 						
 						// Do not execute the trade but exit with false;
 						return false;
@@ -157,6 +156,7 @@ public class OrderEngine {
 					// Only allow to buy trades 
 					if (order.getBUYSELL().equals("SELL")) {
 						
+						logger.debug("Strategy " + strategy + " is marked as CLOSING - no more SELL trades are allowed ...");
 						// Do not execute the trade but exit with false;
 						return false;
 					}	
@@ -186,7 +186,10 @@ public class OrderEngine {
 			 */
 			if (!order.isSimulated()) { 
 				MessageProducer mp = amf.createMessageProducer("orderChannel", 0, true);
-				// Then placing the order on the exchange
+				
+				logger.debug("Sending order " + order.getID() + " to Message queue - waiting for processing ...");
+				
+				// Then placing the order on the queue
 				amf.publishOrder(order, mp);
 				amf.closeMessageProducer(mp);
 			}

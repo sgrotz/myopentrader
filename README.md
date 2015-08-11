@@ -47,6 +47,7 @@ Take a look at the wiki for more detailed information (https://wiki.myopentrader
 
 
 CHANGELOG: 
+* July 11: Amended email-engine - also compiled using JDK1.8
 * June 18: Included new status field for strategies. This allows gradually closing strategies. 
 * Apr 4:  Added new [Collective2.com] (https://www.collective2.com/) Connector. Orders/Strategies can now get tagged with Collective2 systems. Allows external strategy monitoring.
 * Mar 30: Released v0.1.2. Added embedded webserver for MyOpenTraderWeb frontend. Embedded SHIRO for authentication and cleaned up css-mess in the frontend.

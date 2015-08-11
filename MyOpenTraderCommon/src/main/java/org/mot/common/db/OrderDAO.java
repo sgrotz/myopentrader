@@ -786,6 +786,38 @@ public class OrderDAO {
 
 		return order; 
 	}
+	
+	public Order[] getLastOrders(int count) {
+		Order[] order = new Order[count];
+		Statement s;
+		Connection connection = dcf.getConnection();
+		try {
+
+			s = connection.createStatement ();
+
+			String query = "SELECT * FROM orders order by TIMESTAMP desc limit " + count;
+			
+			logger.debug(query);
+			ResultSet rs = s.executeQuery(query);
+
+			int a = 0;
+			while (rs.next()) {
+				order[a] = mapResultSetToOrder(rs);
+				a++;
+			}
+
+			s.close();
+			dcf.disconnect(connection);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			dcf.disconnect(connection);
+		}
+
+		return order; 
+	}
 
 
 	public int updateOrderStatus(String ID, String status) {
