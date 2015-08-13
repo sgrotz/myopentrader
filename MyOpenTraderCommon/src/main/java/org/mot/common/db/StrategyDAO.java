@@ -140,7 +140,7 @@ public class StrategyDAO implements Serializable {
 			String query ="UPDATE `strategies` set STATUS = '" + status.toString() + "' where NAME ='" + name + "'"; 
 			
 			logger.debug(query);
-			s.executeQuery(query);
+			s.executeUpdate(query);
 
 			s.close();
 
@@ -184,6 +184,37 @@ public class StrategyDAO implements Serializable {
 		// convert to an array
 		return entry;
 	}
+	
+	public String getStrategyStatus(String name) {
+
+		Connection connection = dcf.getConnection();
+
+		String entry = null;
+		Statement s;
+
+		try {
+			s = connection.createStatement();
+			String query = "SELECT STATUS FROM `strategies` where NAME = '" + name + "' limit 1";
+			logger.debug(query);
+			ResultSet rs = s.executeQuery(query);
+
+			while (rs.next()) {
+				entry = rs.getString("STATUS");
+			}
+			s.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			// Make sure the connection always gets closed!
+			dcf.disconnect(connection);
+		}
+
+		// convert to an array
+		return entry;
+	}
+	
 
 	private Strategy mapStrategyToEntry(ResultSet rs) throws SQLException {
 		Strategy entry = new Strategy();

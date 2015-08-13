@@ -44,16 +44,31 @@ public class OrderDAO {
 	 * @return
 	 */
 	synchronized public boolean addNewOrder(Order order) {
+		
+		// Check here, if the order already exists (after crash or failure)
+		// If order quantity is larger than 0, order already exists
+		if (this.getOrderAmount(order.getID()) > 0 ) {
+			logger.error("Duplicate Order: " + order.getID() + " found! Ignoring order!");
+			return false;
+		}
 
-		if (order.getAvgBuyPrice() <= 0) {
-			// Set the average price identical to the price. 
+		
+		// Make sure to set the default order status to NEW
+		if (order.getStatus() == null) {
+			order.setStatus(order.status.NEW);
+		}
+		
+		// If the average price is not set - overwrite it to the current price
+		if (order.getAvgBuyPrice() <= 0) { 
 			order.setAvgBuyPrice(order.getPrice());
 		}
 
+		// Default closed flag to empty
 		if (order.getClosed() == null) {
 			order.setClosed("");
 		}
 
+		// If barrier is empty - set the barrier to the current price
 		if (order.getBarrier() <= 0) {
 			order.setBarrier(order.getPrice());
 		}
@@ -62,21 +77,20 @@ public class OrderDAO {
 
 		Statement s;
 		try {
-
 			s = connection.createStatement ();
 
-			logger.debug("INSERT INTO orders VALUES('" + order.getID() +"', '"+ order.getBUYSELL()
-					+"', '"+ order.getQuantity() +"','NEW','" + order.getPrice() + "','" + order.getAvgBuyPrice() + "','"+ order.getBarrier() +"','" + order.getSymbol() + "',(?)," + order.isSimulated() + ",'" + order.getStrategy() +"')");
-
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO orders VALUES('" + order.getID() +"', '"+ order.getBUYSELL()
-					+"', '"+ order.getQuantity() +"','NEW','" + order.getPrice() + "','" + order.getAvgBuyPrice() + "','"+ order.getBarrier() +"','" + order.getSymbol() + "',(?),'" + order.getClosed() + "'," + order.isSimulated() + ",'" + order.getStrategy() +"')");
+			String query = "INSERT INTO orders VALUES('" + order.getID() +"', '"+ order.getBUYSELL()
+					+"', '"+ order.getQuantity() +"','NEW','" + order.getPrice() + "','" + order.getAvgBuyPrice() + "','"+ order.getBarrier() +"','" + order.getSymbol() + "',(?),'" + order.getStatus().toString() + "'," + order.isSimulated() + ",'" + order.getStrategy() +"')"; 
+			
+			logger.debug(query);
+			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setTimestamp(1, db.getTimestampFromDate());
 			ps.executeUpdate();
 
 			s.close();
 			dcf.disconnect(connection);
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
@@ -258,7 +272,7 @@ public class OrderDAO {
 
 	public Double getOrderAmount(String ID) {
 
-		Double ret = null;
+		Double ret = 0.0;
 
 		Connection connection = dcf.getConnection();
 		Statement s;

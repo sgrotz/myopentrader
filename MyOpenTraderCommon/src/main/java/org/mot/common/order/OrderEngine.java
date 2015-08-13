@@ -32,6 +32,7 @@ import org.mot.common.db.StrategyDAO;
 import org.mot.common.db.WatchListDAO;
 import org.mot.common.mq.ActiveMQFactory;
 import org.mot.common.objects.Order;
+import org.mot.common.objects.Strategy;
 import org.mot.common.objects.Strategy.Status;
 import org.mot.common.tools.Collective2Connector;
 import org.mot.common.tools.PropertiesFactory;
@@ -129,8 +130,10 @@ public class OrderEngine {
 			 * In here we will check for the remaining open positions, and depending on being short or long, only allow the opposite side trades.
 			 * This only applies, if you have marked a strategy as "CLOSING" in the DB
 			 */
-			if (order.status.equals(Status.CLOSING)) {
-				String strategy = order.getStrategy();
+			String strategy = order.getStrategy();
+						
+			if (sd.getStrategyStatus(strategy).equals(Status.CLOSING.toString())) {
+
 				int openOrderQuantity = od.getOpenOrderQuantity(strategy);
 				
 				if (openOrderQuantity == 0) {
@@ -233,10 +236,7 @@ public class OrderEngine {
 		// First make sure to set the config directory
 		pf.setConfigDir(configDir);
 				
-		OrderEngine oe = new OrderEngine();
-		//oe.strategyWatchdog();
 		
-		/*
 		String buySell = args[1];
 		String symbol = args[2];
 		String quantity = args[3];
@@ -255,10 +255,11 @@ public class OrderEngine {
 		}
 		
 		OrderEngine oe = new OrderEngine();
-		//oe.evaluateOrder(order, null, true);
+			
+		oe.executeOrder(order, true, false);
 		
-		//oe.executeOrder(order, true);
 		
+		/*
 		*/
 		
 		System.exit(0);
