@@ -11,7 +11,7 @@
   <inceptionYear>2012</inceptionYear>
 
 <properties>
-	<jetty.version>11.0.10</jetty.version>
+	<jetty.version>11.0.14</jetty.version>
 	<apollo.version>1.7.1</apollo.version>
 </properties>  
   
